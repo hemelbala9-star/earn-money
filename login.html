@@ -3,162 +3,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Earn Money</title>
+  <title>Earn Money - Login / Register</title>
   <style>
-    body {
-      background-color: #0b0e14;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 15px;
-    }
-    .welcome-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .welcome-header h1 {
-      color: #ffb703;
-      font-size: 26px;
-      margin-bottom: 5px;
-      text-shadow: 0 2px 10px rgba(255, 183, 3, 0.3);
-    }
-    .welcome-header p {
-      color: #8b949e;
-      font-size: 14px;
-    }
-    .card {
-      background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
-      border: 2px solid #e2a014;
-      padding: 25px;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 8px 25px rgba(226, 160, 20, 0.2);
-    }
-    h2 {
-      text-align: center;
-      color: #ffb703;
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
-    label {
-      font-size: 13px;
-      color: #c9d1d9;
-      display: block;
-      margin-top: 12px;
-      font-weight: bold;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      background: #0b0e14;
-      border: 1px solid #30363d;
-      color: white;
-      border-radius: 8px;
-      box-sizing: border-box;
-      font-size: 14px;
-      outline: none;
-      transition: 0.3s;
-    }
-    input:focus {
-      border-color: #ffb703;
-      box-shadow: 0 0 8px rgba(255, 183, 3, 0.3);
-    }
-    button {
-      width: 100%;
-      padding: 13px;
-      margin-top: 25px;
-      background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%);
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      box-shadow: 0 4px 15px rgba(226, 160, 20, 0.4);
-      transition: 0.3s;
-    }
-    button:hover {
-      opacity: 0.9;
-    }
-    .link {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 13px;
-      color: #8b949e;
-    }
-    .link a {
-      color: #ffb703;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .link a:hover {
-      text-decoration: underline;
-    }
+    body { background-color: #0b0e14; color: #fff; font-family: Arial, sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
+    
+    /* Top Logo Area */
+    .brand-header { text-align: center; margin-bottom: 25px; }
+    .logo-icon { width: 70px; height: 70px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; color: #000; margin: 0 auto 10px; box-shadow: 0 0 20px rgba(255, 183, 3, 0.3); }
+    .brand-header h1 { color: #ffb703; font-size: 24px; margin: 0; }
+    .brand-header p { color: #8b949e; font-size: 13px; margin-top: 5px; }
+
+    /* Main Card */
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    
+    /* Tabs */
+    .tab-container { display: flex; background: #0b0e14; border-radius: 12px; padding: 4px; margin-bottom: 20px; border: 1px solid #30363d; }
+    .tab-btn { flex: 1; padding: 10px; text-align: center; background: transparent; border: none; color: #8b949e; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.3s; }
+    .tab-btn.active { background: #ffb703; color: #000; }
+
+    /* Form Fields */
+    label { font-size: 12px; color: #8b949e; display: block; margin-top: 12px; }
+    .input-box { position: relative; margin-top: 5px; }
+    input { width: 100%; padding: 12px 15px; background: #0b0e14; border: 1px solid #30363d; color: white; border-radius: 10px; box-sizing: border-box; font-size: 14px; outline: none; }
+    input:focus { border-color: #ffb703; }
+    
+    .eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8b949e; font-size: 14px; }
+
+    /* Options */
+    .options { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; font-size: 13px; color: #8b949e; }
+    .checkbox-container { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+    /* Submit Button */
+    .submit-btn { width: 100%; padding: 14px; margin-top: 20px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+    .submit-btn:hover { opacity: 0.9; }
+
+    .form-section { display: none; }
+    .form-section.active { display: block; }
   </style>
 </head>
 <body>
 
-  <div class="welcome-header">
-    <h1>Welcome back to Earn Money 👋</h1>
-    <p>আপনার অ্যাকাউন্ট দিয়ে লগইন করুন</p>
+<div class="container">
+  
+  <!-- Logo & Title -->
+  <div class="brand-header">
+    <div class="logo-icon">৳</div>
+    <h1>Earn Money</h1>
+    <p>স্মার্ট বিনিয়োগ প্ল্যাটফর্ম</p>
   </div>
 
   <div class="card">
-    <h2>অ্যাকাউন্ট লগইন</h2>
     
-    <label>ইমেইল এড্রেস</label>
-    <input type="email" id="login-email" placeholder="আপনার ইমেইল লিখুন">
-
-    <label>পাসওয়ার্ড</label>
-    <input type="password" id="login-password" placeholder="পাসওয়ার্ড লিখুন">
-
-    <button id="login-btn">লগইন করুন</button>
-
-    <div class="link">
-      অ্যাকাউন্ট নেই? <a href="register.html">নতুন অ্যাকাউন্ট তৈরি করুন</a>
+    <!-- Tab Switcher -->
+    <div class="tab-container">
+      <button class="tab-btn active" id="login-tab" onclick="switchTab('login')">🔑 লগইন</button>
+      <button class="tab-btn" id="register-tab" onclick="switchTab('register')">📝 রেজিস্ট্রেশন</button>
     </div>
+
+    <!-- LOGIN FORM -->
+    <div id="login-form" class="form-section active">
+      <label>ইমেইল</label>
+      <input type="email" id="login-email" placeholder="myss@gmail.com">
+
+      <label>পাসওয়ার্ড</label>
+      <div class="input-box">
+        <input type="password" id="login-password" placeholder="পাসওয়ার্ড দিন">
+        <span class="eye-icon" onclick="togglePassword('login-password', this)">👁️</span>
+      </div>
+
+      <div class="options">
+        <label class="checkbox-container">
+          <input type="checkbox" id="remember-me"> আমাকে মনে রাখুন
+        </label>
+      </div>
+
+      <button class="submit-btn" onclick="handleLogin()">লগইন →</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="register-form" class="form-section">
+      <label>ইমেইল</label>
+      <input type="email" id="reg-email" placeholder="ваш_email@gmail.com">
+
+      <label>পাসওয়ার্ড (কমপক্ষে ৬ ডিজিট)</label>
+      <div class="input-box">
+        <input type="password" id="reg-password" placeholder="শক্তিশালী পাসওয়ার্ড দিন">
+        <span class="eye-icon" onclick="togglePassword('reg-password', this)">👁️</span>
+      </div>
+
+      <button class="submit-btn" onclick="handleRegister()">অ্যাকাউন্ট তৈরি করুন →</button>
+    </div>
+
   </div>
+</div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-      authDomain: "earn-money-54b9d.firebaseapp.com",
-      projectId: "earn-money-54b9d",
-      storageBucket: "earn-money-54b9d.firebasestorage.app",
-      messagingSenderId: "1048733611672",
-      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
+    authDomain: "earn-money-54b9d.firebaseapp.com",
+    projectId: "earn-money-54b9d",
+    storageBucket: "earn-money-54b9d.firebasestorage.app",
+    messagingSenderId: "1048733611672",
+    appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-    document.getElementById('login-btn').addEventListener('click', async () => {
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
+  // Tab Switching Function
+  window.switchTab = (tab) => {
+    if (tab === 'login') {
+      document.getElementById('login-tab').classList.add('active');
+      document.getElementById('register-tab').classList.remove('active');
+      document.getElementById('login-form').classList.add('active');
+      document.getElementById('register-form').classList.remove('active');
+    } else {
+      document.getElementById('register-tab').classList.add('active');
+      document.getElementById('login-tab').classList.remove('active');
+      document.getElementById('register-form').classList.add('active');
+      document.getElementById('login-form').classList.remove('active');
+    }
+  };
 
-      if (!email || !password) {
-        alert("দয়া করে ইমেইল এবং পাসওয়ার্ড দিন!");
-        return;
-      }
+  // Password Visibility Toggle
+  window.togglePassword = (id, el) => {
+    const input = document.getElementById(id);
+    if (input.type === 'password') {
+      input.type = 'text';
+      el.innerText = '🙈';
+    } else {
+      input.type = 'password';
+      el.innerText = '👁️';
+    }
+  };
 
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert("লগইন সফল হয়েছে!");
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        alert("লগইন ব্যর্থ হয়েছে: " + error.message);
-      }
-    });
-  </script>
+  // Login Logic
+  window.handleLogin = async () => {
+    const email = document.getElementById('login-email').value;
+    const pass = document.getElementById('login-password').value;
+
+    if (!email || !pass) {
+      alert("দয়া করে ইমেইল এবং পাসওয়ার্ড দিন!");
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      alert("লগইন সফল হয়েছে!");
+      window.location.href = "index.html";
+    } catch (error) {
+      alert("লগইন ব্যর্থ: " + error.message);
+    }
+  };
+
+  // Register Logic (নতুন ইউজারের জন্য ৩টি ওয়ালেট ও টার্নওভার সেটআপসহ)
+  window.handleRegister = async () => {
+    const email = document.getElementById('reg-email').value;
+    const pass = document.getElementById('reg-password').value;
+
+    if (!email || !pass) {
+      alert("সব ঘর পূরণ করুন!");
+      return;
+    }
+
+    try {
+      const userCred = await createUserWithEmailAndPassword(auth, email, pass);
+      const user = userCred.user;
+
+      // ডেটাবেসে ইউজারের বেস প্রফাইল তৈরি (৩টি ওয়ালেট এবং টার্নওভার সহ)
+      await setDoc(doc(db, "users", user.uid), {
+        email: email,
+        depositWallet: 0,
+        bonusWallet: 0,
+        incomeWallet: 0,
+        turnover: 0,
+        paymentNumber: "",
+        role: "user",
+        createdAt: serverTimestamp()
+      });
+
+      alert("রেজিস্ট্রেশন সফল হয়েছে!");
+      window.location.href = "index.html";
+    } catch (error) {
+      alert("রেজিস্ট্রেশন ব্যর্থ: " + error.message);
+    }
+  };
+</script>
+
 </body>
 </html>
