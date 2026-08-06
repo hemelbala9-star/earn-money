@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Earn Money</title>
+    <title>Earn Money - Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -12,114 +12,242 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background-color: #f4f7f6;
-            padding-bottom: 20px;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            padding-bottom: 70px;
         }
         header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 20px;
+            background-color: #121212;
+            border-bottom: 1px solid #222;
         }
-        .user-info h3 {
-            font-size: 16px;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .logout-btn {
-            background-color: #e74c3c;
-            color: white;
-            padding: 6px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 12px;
+        .logo-icon {
+            background: #f39c12;
+            color: #000;
+            font-weight: bold;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .logo-text {
+            color: #f1c40f;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            font-size: 18px;
         }
         .container {
             padding: 15px;
         }
-        .balance-card {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
+        .main-balance-card {
+            background: linear-gradient(145deg, #1f1b0e, #141108);
+            border: 1px solid #d4af37;
+            border-radius: 15px;
             padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
         }
-        .balance-card h2 {
-            font-size: 32px;
-            margin: 10px 0;
-        }
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .grid-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .grid-item span {
-            display: block;
-            font-size: 24px;
+        .card-title {
+            color: #888;
+            font-size: 12px;
+            letter-spacing: 1px;
             margin-bottom: 5px;
         }
-        .notice {
-            background: #fff3cd;
-            color: #856404;
-            padding: 12px;
-            border-radius: 6px;
+        .main-balance {
+            color: #f39c12;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .user-greeting {
+            color: #ccc;
             font-size: 14px;
-            border: 1px solid #ffeeba;
+        }
+        .user-name {
+            color: #fff;
+            font-weight: bold;
+        }
+        .wallet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .wallet-card {
+            background: #141414;
+            border: 1px solid #282828;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .wallet-card.bonus {
+            border-color: #27ae60;
+        }
+        .wallet-card.deposit {
+            border-color: #2980b9;
+        }
+        .wallet-title {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .wallet-amount {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .bonus .wallet-amount { color: #2ecc71; }
+        .deposit .wallet-amount { color: #3498db; }
+        .golden-amount { color: #f39c12; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #141414;
+            border: 1px solid #282828;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .stat-amount {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #777;
+            letter-spacing: 0.5px;
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #121212;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 6px 0;
+        }
+        .nav-item {
+            text-decoration: none;
+            color: #777;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+        }
+        .nav-item.active {
+            color: #f39c12;
+        }
+        .nav-item span {
+            font-size: 18px;
+            margin-bottom: 3px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="user-info">
-            <h3>স্বাগতম, ইউজার!</h3>
+        <div class="logo-area">
+            <div class="logo-icon">৳</div>
+            <div class="logo-text">Earn Money</div>
         </div>
-        <a href="login.html" class="logout-btn">লগআউট</a>
+        <div class="header-icons">
+            <span>🇧🇩</span>
+            <span>🔔</span>
+            <span>👑</span>
+        </div>
     </header>
 
     <div class="container">
-        <div class="balance-card">
-            <p>বর্তমান ব্যালেন্স</p>
-            <h2>৳ 0.00</h2>
-            <p>প্ল্যান: ফ্রি মেম্বার</p>
+        <div class="main-balance-card">
+            <div class="card-title">TOTAL BALANCE (INCOME WALLET)</div>
+            <div class="main-balance">৳ 0.00</div>
+            <div class="user-greeting">Welcome back, <span class="user-name">User</span> 👋</div>
         </div>
 
-        <div class="action-grid">
-            <a href="task.html" class="grid-item">
-                <span>📺</span>
-                ডেইলি টাস্ক (Ads)
-            </a>
-            <a href="deposit.html" class="grid-item">
-                <span>💳</span>
-                ডিপোজিট
-            </a>
-            <a href="withdraw.html" class="grid-item">
-                <span>🏧</span>
-                উইথড্র
-            </a>
-            <a href="referral.html" class="grid-item">
-                <span>👥</span>
-                রেফারেল
-            </a>
+        <div class="wallet-grid">
+            <div class="wallet-card bonus">
+                <div class="wallet-title">🎁 Bonus Wallet</div>
+                <div class="wallet-amount">৳ 0.00</div>
+            </div>
+            <div class="wallet-card deposit">
+                <div class="wallet-title">💳 Deposit Wallet</div>
+                <div class="wallet-amount">৳ 0.00</div>
+            </div>
         </div>
 
-        <div class="notice">
-            📢 <strong>নোটিশ:</strong> প্রতিদিনের টাস্ক সম্পূর্ণ করে ব্যালেন্স বাড়ান। যেকোনো সমস্যায় সাপোর্ট টিমে যোগাযোগ করুন।
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-amount golden-amount">৳ 0</div>
+                <div class="stat-label">TOTAL DEPOSIT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-amount" style="color: #e74c3c;">৳ 0</div>
+                <div class="stat-label">WITHDRAWN</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-amount golden-amount">৳ 0</div>
+                <div class="stat-label">PROFIT EARNED</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-amount golden-amount">৳ 0</div>
+                <div class="stat-label">REFERRAL BONUS</div>
+            </div>
         </div>
     </div>
 
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span>🏠</span>
+            হোম
+        </a>
+        <a href="#" class="nav-item">
+            <span>📈</span>
+            পরিকল্পনা
+        </a>
+        <a href="deposit.html" class="nav-item">
+            <span>💳</span>
+            জমা
+        </a>
+        <a href="task.html" class="nav-item">
+            <span>🎮</span>
+            GAME
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span>🏧</span>
+            উত্তোলন
+        </a>
+        <a href="referral.html" class="nav-item">
+            <span>👤</span>
+            প্রোফাইল
+        </a>
+    </nav>
+
 </body>
-</html>
+    </html>
+            
