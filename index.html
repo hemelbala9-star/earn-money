@@ -5,37 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Money - Home</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
-            padding: 50px 20px;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        h1 {
-            color: #2c3e50;
+        body {
+            background-color: #f4f7f6;
+            color: #333;
         }
-        p {
-            color: #555;
-            font-size: 18px;
+        nav {
+            background-color: #2c3e50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
+        nav .logo {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        nav .nav-btn {
             background-color: #27ae60;
             color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: #ffffff;
+        }
+        .hero h1 {
+            color: #2c3e50;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .hero .btn-main {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            display: inline-block;
+        }
+        .features {
+            padding: 30px 20px;
+        }
+        .features h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            color: #27ae60;
+            margin-bottom: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+            font-size: 14px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Welcome to Earn Money Platform</h1>
-    <p>আপনার মোবাইল দিয়ে সহজেই আয় করুন।</p>
-    <a href="#" class="btn">Get Started</a>
+    <nav>
+        <div class="logo">EarnMoney</div>
+        <a href="#" class="nav-btn">Login</a>
+    </nav>
+
+    <section class="hero">
+        <h1>দৈনিক কাজ করে আয় করুন</h1>
+        <p>সহজ বিজ্ঞাপন দেখে এবং রেফার করে প্রতিদিন টাকা আয় করুন।</p>
+        <a href="#" class="btn-main">রেজিস্টার করুন</a>
+    </section>
+
+    <section class="features">
+        <h2>আমাদের সুবিধাসমূহ</h2>
+        <div class="card">
+            <h3>সহজ বিজ্ঞাপন</h3>
+            <p>প্রতিদিন নির্দিষ্ট পরিমাণ ভিডিও এবং অ্যাড দেখে পয়েন্ট অর্জন করুন।</p>
+        </div>
+        <div class="card">
+            <h3>তাত্ক্ষণিক উইথড্র</h3>
+            <p>বিকাশ, নগদ এবং রকেটের মাধ্যমে দ্রুত পেমেন্ট বুঝে নিন।</p>
+        </div>
+        <div class="card">
+            <h3>রেফারেল বোনাস</h3>
+            <p>বন্ধুদের আমন্ত্রণ জানিয়ে পান আকর্ষণীয় বোনাস কমিশন।</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 EarnMoney Platform. All rights reserved.</p>
+    </footer>
 
 </body>
-</html>
+        </html>
+        
