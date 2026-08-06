@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Earn Money - Login / Register</title>
+  <title>Earn Money - Login</title>
   <style>
     body { background-color: #0b0e14; color: #fff; font-family: Arial, sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px 0; }
     .container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
@@ -16,7 +16,7 @@
     .card { background: #161b22; border: 1px solid #30363d; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     
     .tab-container { display: flex; background: #0b0e14; border-radius: 12px; padding: 4px; margin-bottom: 20px; border: 1px solid #30363d; }
-    .tab-btn { flex: 1; padding: 10px; text-align: center; background: transparent; border: none; color: #8b949e; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.3s; }
+    .tab-btn { flex: 1; padding: 10px; text-align: center; background: transparent; border: none; color: #8b949e; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block; }
     .tab-btn.active { background: #ffb703; color: #000; }
 
     label { font-size: 12px; color: #8b949e; display: block; margin-top: 12px; }
@@ -24,22 +24,14 @@
     input { width: 100%; padding: 11px 15px; background: #0b0e14; border: 1px solid #30363d; color: white; border-radius: 10px; box-sizing: border-box; font-size: 14px; outline: none; }
     input:focus { border-color: #ffb703; }
     
-    .phone-row { display: flex; gap: 8px; margin-top: 4px; }
-    .country-code { width: 95px; background: #0b0e14; border: 1px solid #30363d; color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; gap: 5px; }
-
     .eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8b949e; font-size: 14px; }
-
     .submit-btn { width: 100%; padding: 14px; margin-top: 20px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; transition: 0.3s; }
     .submit-btn:hover { opacity: 0.9; }
-
-    .form-section { display: none; }
-    .form-section.active { display: block; }
   </style>
 </head>
 <body>
 
 <div class="container">
-  
   <div class="brand-header">
     <div class="logo-icon">৳</div>
     <h1>Earn Money</h1>
@@ -47,14 +39,12 @@
   </div>
 
   <div class="card">
-    
     <div class="tab-container">
-      <button class="tab-btn active" id="login-tab" onclick="switchTab('login')">🔑 লগইন</button>
-      <button class="tab-btn" id="register-tab" onclick="switchTab('register')">📝 রেজিস্ট্রেশন</button>
+      <a href="login.html" class="tab-btn active">🔑 লগইন</a>
+      <a href="register.html" class="tab-btn">📝 রেজিস্ট্রেশন</a>
     </div>
 
-    <!-- LOGIN FORM -->
-    <div id="login-form" class="form-section active">
+    <div>
       <label>ইমেইল</label>
       <input type="email" id="login-email" placeholder="myss@gmail.com">
 
@@ -66,46 +56,12 @@
 
       <button class="submit-btn" onclick="handleLogin()">লগইন →</button>
     </div>
-
-    <!-- REGISTER FORM -->
-    <div id="register-form" class="form-section">
-      <label>পুরো নাম</label>
-      <input type="text" id="reg-name" placeholder="Your full name">
-
-      <label>ইমেইল</label>
-      <input type="email" id="reg-email" placeholder="your@email.com">
-
-      <label>ফোন নাম্বার</label>
-      <div class="phone-row">
-        <div class="country-code">🇧🇩 +880</div>
-        <input type="text" id="reg-phone" placeholder="01XXXXXXXXX">
-      </div>
-
-      <label>পাসওয়ার্ড</label>
-      <div class="input-box">
-        <input type="password" id="reg-password" placeholder="Min 6 characters">
-        <span class="eye-icon" onclick="togglePassword('reg-password', this)">👁️</span>
-      </div>
-
-      <label>পাসওয়ার্ড নিশ্চিত করুন</label>
-      <div class="input-box">
-        <input type="password" id="reg-cpassword" placeholder="Re-enter password">
-        <span class="eye-icon" onclick="togglePassword('reg-cpassword', this)">👁️</span>
-      </div>
-
-      <label>রেফারেল কোড (ঐচ্ছিক)</label>
-      <input type="text" id="reg-ref" placeholder="ENTER REFERRAL CODE">
-
-      <button class="submit-btn" onclick="handleRegister()">একউন্ট তৈরি করুন →</button>
-    </div>
-
   </div>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
@@ -118,31 +74,6 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // অটোমেটিক রেফার কোড এবং ট্যাব হ্যান্ডেলিং
-  window.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const refCode = urlParams.get('ref');
-    if (refCode) {
-      document.getElementById('reg-ref').value = refCode;
-      switchTab('register');
-    }
-  });
-
-  window.switchTab = (tab) => {
-    if (tab === 'login') {
-      document.getElementById('login-tab').classList.add('active');
-      document.getElementById('register-tab').classList.remove('active');
-      document.getElementById('login-form').classList.add('active');
-      document.getElementById('register-form').classList.remove('active');
-    } else {
-      document.getElementById('register-tab').classList.add('active');
-      document.getElementById('login-tab').classList.remove('active');
-      document.getElementById('register-form').classList.add('active');
-      document.getElementById('login-form').classList.remove('active');
-    }
-  };
 
   window.togglePassword = (id, el) => {
     const input = document.getElementById(id);
@@ -170,51 +101,6 @@
       window.location.href = "index.html";
     } catch (error) {
       alert("লগইন ব্যর্থ: " + error.message);
-    }
-  };
-
-  window.handleRegister = async () => {
-    const name = document.getElementById('reg-name').value;
-    const email = document.getElementById('reg-email').value;
-    const phone = document.getElementById('reg-phone').value;
-    const pass = document.getElementById('reg-password').value;
-    const cpass = document.getElementById('reg-cpassword').value;
-    const refBy = document.getElementById('reg-ref').value;
-
-    if (!name || !email || !phone || !pass || !cpass) {
-      alert("সবগুলো ফিল্ড পূরণ করা বাধ্যতামূলক!");
-      return;
-    }
-
-    if (pass !== cpass) {
-      alert("পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড মিলছে না!");
-      return;
-    }
-
-    try {
-      const userCred = await createUserWithEmailAndPassword(auth, email, pass);
-      const user = userCred.user;
-      const myRefCode = user.uid.substring(0, 6).toUpperCase();
-
-      await setDoc(doc(db, "users", user.uid), {
-        name: name,
-        email: email,
-        phone: "+880" + phone,
-        referCode: myRefCode,
-        referredBy: refBy || "None",
-        depositWallet: 0,
-        bonusWallet: 0,
-        incomeWallet: 0,
-        turnover: 0,
-        paymentNumber: "",
-        role: "user",
-        createdAt: serverTimestamp()
-      });
-
-      alert("রেজিস্ট্রেশন সফল হয়েছে!");
-      window.location.href = "index.html";
-    } catch (error) {
-      alert("রেজিস্ট্রেশন ব্যর্থ: " + error.message);
     }
   };
 </script>
