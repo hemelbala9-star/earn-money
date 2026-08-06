@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Tasks - Earn Money</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f7f6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .ad-box {
+            background: #e0e0e0;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            color: #666;
+            font-weight: bold;
+        }
+        .timer-box {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .btn-claim {
+            width: 100%;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-claim:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>ডেইলি অ্যাড টাস্ক</h2>
+
+        <div class="ad-box">
+            [ এখানে বিজ্ঞাপন প্রদর্শিত হবে ]
+        </div>
+
+        <div class="timer-box">
+            সময় বাকি: <span id="timer">১০</span> সেকেন্ড
+        </div>
+
+        <button id="claimBtn" class="btn-claim" disabled onclick="claimReward()">রিওয়ার্ড ক্লাইম করুন</button>
+
+        <a href="dashboard.html" class="back-link">← ড্যাশবোর্ডে ফিরে যান</a>
+    </div>
+
+    <script>
+        let timeLeft = 10;
+        const timerElement = document.getElementById('timer');
+        const claimBtn = document.getElementById('claimBtn');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerElement.parentNode.textContent = "বিজ্ঞাপন দেখা সম্পন্ন হয়েছে!";
+                claimBtn.disabled = false;
+            }
+        }, 1000);
+
+        function claimReward() {
+            alert('অভিনন্দন! আপনি ১০ টাকা বোনাস পেয়েছেন।');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+
+</body>
+</html>
