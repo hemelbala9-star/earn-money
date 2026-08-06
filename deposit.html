@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit - Earn Money</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f7f6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .method-box {
+            background: #eef9f2;
+            border: 1px solid #27ae60;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .method-box strong {
+            color: #27ae60;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>টাকা ডিপোজিট করুন</h2>
+
+        <div class="method-box">
+            <p><strong>বিকাশ/নগদ (Personal):</strong> 01700000000</p>
+            <p style="margin-top: 5px; font-size: 12px; color: #666;">* উপরের নম্বরে ক্যাশ আউট বা সেন্ড মানি করার পর নিচের ফর্মটি পূরণ করুন।</p>
+        </div>
+
+        <form>
+            <div class="input-group">
+                <label>পেমেন্ট মেথড সিলেক্ট করুন</label>
+                <select required>
+                    <option value="">সিলেক্ট করুন</option>
+                    <option value="bkash">Bkash</option>
+                    <option value="nagad">Nagad</option>
+                    <option value="rocket">Rocket</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>টাকার পরিমাণ (BDT)</label>
+                <input type="number" placeholder="সর্বনিম্ন ১০০ টাকা" required>
+            </div>
+            <div class="input-group">
+                <label>যে নম্বর থেকে পাঠিয়েছেন</label>
+                <input type="text" placeholder="মোবাইল নম্বর দিন" required>
+            </div>
+            <div class="input-group">
+                <label>ট্রানজেকশন আইডি (TrxID)</label>
+                <input type="text" placeholder="TrxID দিন" required>
+            </div>
+            <button type="submit" class="btn-submit">ডিপোজিট রিকোয়েস্ট পাঠান</button>
+        </form>
+
+        <a href="dashboard.html" class="back-link">← ড্যাশবোর্ডে ফিরে যান</a>
+    </div>
+
+</body>
+</html>
