@@ -1,102 +1,98 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Earn Money</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .form-container {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-size: 14px;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .footer-link {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .footer-link a {
-            color: #3498db;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Earn Money</title>
+  <style>
+    body { background-color: #0b0e14; color: white; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .card { background: #161b22; border: 1px solid #30363d; padding: 25px; border-radius: 15px; width: 100%; max-width: 380px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+    h2 { text-align: center; color: #ffb703; margin-bottom: 20px; }
+    label { font-size: 13px; color: #8b949e; display: block; margin-top: 10px; }
+    input { width: 100%; padding: 12px; margin-top: 5px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+    button { width: 100%; padding: 12px; margin-top: 20px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); color: #000; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+    .link { text-align: center; margin-top: 15px; font-size: 13px; color: #8b949e; }
+    .link a { color: #ffb703; text-decoration: none; }
+  </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>অ্যাাকাউন্ট তৈরি করুন</h2>
-        <form action="dashboard.html">
-            <div class="input-group">
-                <label>আপনার নাম</label>
-                <input type="text" placeholder="পুরো নাম লিখুন" required>
-            </div>
-            <div class="input-group">
-                <label>ইমেইল অথবা মোবাইল নম্বর</label>
-                <input type="text" placeholder="নম্বর বা ইমেইল লিখুন" required>
-            </div>
-            <div class="input-group">
-                <label>পাসওয়ার্ড</label>
-                <input type="password" placeholder="পাসওয়ার্ড দিন" required>
-            </div>
-            <div class="input-group">
-                <label>রেফারেল কোড (ঐচ্ছিক)</label>
-                <input type="text" placeholder="রেফার কোড থাকলে দিন">
-            </div>
-            <button type="submit" class="btn-submit">রেজিস্টার</button>
-        </form>
-        <div class="footer-link">
-            আগে থেকেই অ্যাকাউন্ট আছে? <a href="login.html">লগইন করুন</a>
-        </div>
-    </div>
+  <div class="card">
+    <h2>নতুন অ্যাকাউন্ট তৈরি করুন</h2>
+    
+    <label>আপনার নাম</label>
+    <input type="text" id="reg-name" placeholder="পূর্ণ নাম লিখুন">
 
+    <label>ইমেইল এড্রেস</label>
+    <input type="email" id="reg-email" placeholder="example@gmail.com">
+
+    <label>পাসওয়ার্ড</label>
+    <input type="password" id="reg-password" placeholder="কমপক্ষে ৬ ডিজিটের পাসওয়ার্ড">
+
+    <label>রেফার কোড (ঐচ্ছিক)</label>
+    <input type="text" id="ref-code" placeholder="রেফার কোড থাকলে দিন">
+
+    <button id="register-btn">রেজিস্ট্রেশন করুন</button>
+
+    <div class="link">
+      ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="login.html">লগইন করুন</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
+      authDomain: "earn-money-54b9d.firebaseapp.com",
+      projectId: "earn-money-54b9d",
+      storageBucket: "earn-money-54b9d.firebasestorage.app",
+      messagingSenderId: "1048733611672",
+      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    document.getElementById('register-btn').addEventListener('click', async () => {
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+      const password = document.getElementById('reg-password').value;
+
+      if (!name || !email || !password) {
+        alert("সবগুলো ঘর সঠিকভাবে পূরণ করুন!");
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // ফায়ারস্টোরে ইউজারের ওয়ালেট ও ইনিশিয়াল ডাটা সেভ করা
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          name: name,
+          email: email,
+          incomeWallet: 0,
+          bonusWallet: 0,
+          depositWallet: 0,
+          turnover: 0,
+          totalDeposit: 0,
+          totalWithdraw: 0,
+          totalProfit: 0,
+          referBonus: 0,
+          role: "user" // ডিফল্ট রোল ইউজার
+        });
+
+        alert("সফলভাবে রেজিস্ট্রেশন সম্পন্ন হয়েছে!");
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        alert("ত্রুটি: " + error.message);
+      }
+    });
+  </script>
 </body>
 </html>
