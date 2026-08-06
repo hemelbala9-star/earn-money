@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Money - Home</title>
+    <title>Earn Money - Login & Register</title>
     <style>
         * {
             margin: 0;
@@ -12,114 +12,200 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background-color: #f4f7f6;
-            color: #333;
-        }
-        nav {
-            background-color: #2c3e50;
-            padding: 15px 20px;
+            background-color: #0d0d0d;
+            color: #ffffff;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
-        nav .logo {
-            color: #fff;
-            font-size: 20px;
+        .auth-card {
+            background: #141414;
+            border: 1px solid #d4af37;
+            border-radius: 15px;
+            padding: 25px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+        .auth-title {
+            color: #f1c40f;
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
             font-weight: bold;
         }
-        nav .nav-btn {
-            background-color: #27ae60;
-            color: white;
-            padding: 8px 15px;
-            text-decoration: none;
-            border-radius: 5px;
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
             font-size: 14px;
+            outline: none;
         }
-        .hero {
+        .form-group input:focus {
+            border-color: #f39c12;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(145deg, #f39c12, #d35400);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .toggle-text {
             text-align: center;
-            padding: 50px 20px;
-            background: #ffffff;
+            font-size: 13px;
+            color: #888;
+            margin-top: 15px;
         }
-        .hero h1 {
-            color: #2c3e50;
-            font-size: 26px;
+        .toggle-text span {
+            color: #f39c12;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .msg {
+            text-align: center;
+            font-size: 13px;
             margin-bottom: 10px;
         }
-        .hero p {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-        .hero .btn-main {
-            background-color: #3498db;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-        }
-        .features {
-            padding: 30px 20px;
-        }
-        .features h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .card h3 {
-            color: #27ae60;
-            margin-bottom: 8px;
-        }
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #2c3e50;
-            color: white;
-            font-size: 14px;
-            margin-top: 20px;
-        }
+        .msg.error { color: #e74c3c; }
+        .msg.success { color: #2ecc71; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">EarnMoney</div>
-        <a href="login.html" class="nav-btn">Login</a>
-    </nav>
+    <div class="auth-card">
+        <div class="auth-title" id="formTitle">User Registration</div>
+        <div id="msgBox" class="msg"></div>
 
-    <section class="hero">
-        <h1>দৈনিক কাজ করে আয় করুন</h1>
-        <p>সহজ বিজ্ঞাপন দেখে এবং রেফার করে প্রতিদিন টাকা আয় করুন।</p>
-        <a href="register.html" class="btn-main">রেজিস্টার করুন</a>
-    </section>
+        <form id="authForm">
+            <div class="form-group" id="nameGroup">
+                <label>Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn" id="submitBtn">Register Account</button>
+        </form>
 
-    <section class="features">
-        <h2>আমাদের সুবিধাসমূহ</h2>
-        <div class="card">
-            <h3>সহজ বিজ্ঞাপন</h3>
-            <p>প্রতিদিন নির্দিষ্ট পরিমাণ ভিডিও এবং অ্যাড দেখে পয়েন্ট অর্জন করুন।</p>
+        <div class="toggle-text">
+            <span id="toggleBtn">Already have an account? Login</span>
         </div>
-        <div class="card">
-            <h3>তাত্ক্ষণিক উইথড্র</h3>
-            <p>বিকাশ, নগদ এবং রকেটের মাধ্যমে দ্রুত পেমেন্ট বুঝে নিন।</p>
-        </div>
-        <div class="card">
-            <h3>রেফারেল বোনাস</h3>
-            <p>বন্ধুদের আমন্ত্রণ জানিয়ে পান আকর্ষণীয় বোনাস কমিশন।</p>
-        </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 EarnMoney Platform. All rights reserved.</p>
-    </footer>
+    <!-- Firebase SDK Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
+            authDomain: "earn-money-54b9d.firebaseapp.com",
+            projectId: "earn-money-54b9d",
+            storageBucket: "earn-money-54b9d.firebasestorage.app",
+            messagingSenderId: "1048733611672",
+            appId: "1:1048733611672:web:3766b73fc5c784f3c682ed",
+            measurementId: "G-QCLK8SKGSD"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let isLogin = false;
+
+        const authForm = document.getElementById('authForm');
+        const formTitle = document.getElementById('formTitle');
+        const nameGroup = document.getElementById('nameGroup');
+        const submitBtn = document.getElementById('submitBtn');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const msgBox = document.getElementById('msgBox');
+
+        toggleBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            if (isLogin) {
+                formTitle.innerText = "User Login";
+                nameGroup.style.display = "none";
+                document.getElementById('fullName').removeAttribute('required');
+                submitBtn.innerText = "Login";
+                toggleBtn.innerText = "Don't have an account? Register";
+            } else {
+                formTitle.innerText = "User Registration";
+                nameGroup.style.display = "block";
+                document.getElementById('fullName').setAttribute('required', 'true');
+                submitBtn.innerText = "Register Account";
+                toggleBtn.innerText = "Already have an account? Login";
+            }
+        });
+
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            msgBox.innerText = "Processing...";
+            msgBox.className = "msg";
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!isLogin) {
+                const fullName = document.getElementById('fullName').value;
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+
+                    await setDoc(doc(db, "users", user.uid), {
+                        name: fullName,
+                        email: email,
+                        balance: 0,
+                        bonusWallet: 0,
+                        depositWallet: 0,
+                        createdAt: new Date()
+                    });
+
+                    msgBox.innerText = "Registration Successful!";
+                    msgBox.className = "msg success";
+                    setTimeout(() => { window.location.href = "dashboard.html"; }, 1500);
+                } catch (error) {
+                    msgBox.innerText = error.message;
+                    msgBox.className = "msg error";
+                }
+            } else {
+                try {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    msgBox.innerText = "Login Successful!";
+                    msgBox.className = "msg success";
+                    setTimeout(() => { window.location.href = "dashboard.html"; }, 1500);
+                } catch (error) {
+                    msgBox.innerText = error.message;
+                    msgBox.className = "msg error";
+                }
+            }
+        });
+    </script>
 </body>
-</html>
+        </html>
+        
