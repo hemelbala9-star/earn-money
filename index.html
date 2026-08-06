@@ -1,211 +1,144 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Money - Login & Register</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background-color: #0d0d0d;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .auth-card {
-            background: #141414;
-            border: 1px solid #d4af37;
-            border-radius: 15px;
-            padding: 25px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
-        }
-        .auth-title {
-            color: #f1c40f;
-            text-align: center;
-            font-size: 22px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            color: #aaa;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            background-color: #222;
-            border: 1px solid #333;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 14px;
-            outline: none;
-        }
-        .form-group input:focus {
-            border-color: #f39c12;
-        }
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(145deg, #f39c12, #d35400);
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .toggle-text {
-            text-align: center;
-            font-size: 13px;
-            color: #888;
-            margin-top: 15px;
-        }
-        .toggle-text span {
-            color: #f39c12;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .msg {
-            text-align: center;
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-        .msg.error { color: #e74c3c; }
-        .msg.success { color: #2ecc71; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Earn Money</title>
+  <style>
+    body { background-color: #0b0e14; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding-bottom: 70px; }
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #12161f; border-bottom: 1px solid #222; }
+    .logo-area { display: flex; align-items: center; gap: 8px; color: #ffb703; font-weight: bold; font-size: 18px; }
+    .icons-area { display: flex; gap: 12px; align-items: center; }
+    .icon-btn { background: #1f242d; border: 1px solid #333; padding: 6px 10px; border-radius: 50%; color: #fff; cursor: pointer; }
+    
+    .container { padding: 15px; max-width: 500px; margin: auto; }
+    
+    /* Main Income Wallet Card */
+    .main-wallet { background: linear-gradient(135deg, #1b1f2b 0%, #12151d 100%); border: 2px solid #e2a014; border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(226,160,20,0.15); }
+    .wallet-title { font-size: 12px; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; }
+    .wallet-amount { font-size: 32px; font-weight: bold; color: #ffb703; margin: 8px 0; }
+    
+    /* Sub Wallets Grid */
+    .sub-wallets { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+    .sub-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 12px; text-align: center; }
+    .bonus-card { border-color: #2ea043; }
+    .deposit-card { border-color: #1f6feb; }
+    
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+    .stat-box { background: #161b22; border: 1px solid #222; border-radius: 10px; padding: 12px; text-align: center; }
+    .stat-val { font-size: 18px; font-weight: bold; color: #ff5252; }
+    
+    /* Turnover Info Box */
+    .turnover-box { background: #1e1e2e; border: 1px solid #ffb703; border-radius: 10px; padding: 12px; margin-bottom: 15px; font-size: 13px; text-align: center; }
+
+    /* Bottom Nav */
+    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; z-index: 1000; }
+    .bottom-nav a { color: #888; text-decoration: none; text-align: center; font-size: 11px; }
+    .bottom-nav a.active { color: #ffb703; }
+    .bottom-nav div { font-size: 18px; }
+  </style>
 </head>
 <body>
 
-    <div class="auth-card">
-        <div class="auth-title" id="formTitle">User Registration</div>
-        <div id="msgBox" class="msg"></div>
+  <div class="header">
+    <div class="logo-area">
+      <span style="background: #ffb703; padding: 5px 10px; border-radius: 6px; color:#000;">৳</span> Earn Money
+    </div>
+    <div class="icons-area">
+      <span>🇧🇩</span>
+      <div class="icon-btn">🔔</div>
+      <!-- রয়্যাল মুকুট - শুধু এডমিন দেখতে পাবে -->
+      <div id="admin-crown" class="icon-btn" style="display: none; background: #e2a014; color: #000;" onclick="location.href='admin.html'">👑</div>
+    </div>
+  </div>
 
-        <form id="authForm">
-            <div class="form-group" id="nameGroup">
-                <label>Full Name</label>
-                <input type="text" id="fullName" placeholder="Enter your name" required>
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="Enter password" required>
-            </div>
-            <button type="submit" class="btn" id="submitBtn">Register Account</button>
-        </form>
-
-        <div class="toggle-text">
-            <span id="toggleBtn">Already have an account? Login</span>
-        </div>
+  <div class="container">
+    <!-- Main Income Wallet -->
+    <div class="main-wallet">
+      <div class="wallet-title">TOTAL BALANCE (INCOME WALLET)</div>
+      <div class="wallet-amount" id="income-wallet">৳0.00</div>
+      <div style="font-size: 13px; color: #ccc;" id="welcome-user">Welcome back, User 👋</div>
     </div>
 
-    <!-- Firebase SDK Logic -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    <!-- Bonus & Deposit Wallets -->
+    <div class="sub-wallets">
+      <div class="sub-card bonus-card">
+        <div style="font-size: 12px; color: #2ea043;">🎁 Bonus Wallet</div>
+        <div id="bonus-wallet" style="font-size: 20px; font-weight: bold; margin-top: 5px;">৳0.00</div>
+      </div>
+      <div class="sub-card deposit-card">
+        <div style="font-size: 12px; color: #58a6ff;">💳 Deposit Wallet</div>
+        <div id="deposit-wallet" style="font-size: 20px; font-weight: bold; margin-top: 5px;">৳0.00</div>
+      </div>
+    </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-            authDomain: "earn-money-54b9d.firebaseapp.com",
-            projectId: "earn-money-54b9d",
-            storageBucket: "earn-money-54b9d.firebasestorage.app",
-            messagingSenderId: "1048733611672",
-            appId: "1:1048733611672:web:3766b73fc5c784f3c682ed",
-            measurementId: "G-QCLK8SKGSD"
-        };
+    <!-- Turnover Requirement Box -->
+    <div class="turnover-box">
+      <div>টার্নওভার বাকি (Turnover Required): <b id="turnover-left" style="color:#ffb703;">৳0</b></div>
+      <small style="color: #aaa;">উত্তোলন করতে হলে গেম খেলে এই টার্নওভার শূন্য করতে হবে।</small>
+    </div>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+    <!-- Stats Boxes -->
+    <div class="stats-grid">
+      <div class="stat-box"><div id="total-deposit" class="stat-val" style="color:#2ea043;">৳0</div><small style="color:#888;">TOTAL DEPOSIT</small></div>
+      <div class="stat-box"><div id="total-withdraw" class="stat-val">৳0</div><small style="color:#888;">WITHDRAWN</small></div>
+      <div class="stat-box"><div id="total-profit" class="stat-val" style="color:#ffb703;">৳0</div><small style="color:#888;">PROFIT EARNED</small></div>
+      <div class="stat-box"><div id="total-ref-bonus" class="stat-val" style="color:#58a6ff;">৳0</div><small style="color:#888;">REFERRAL BONUS</small></div>
+    </div>
+  </div>
 
-        let isLogin = false;
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="dashboard.html" class="active"><div>🏠</div>হোম</a>
+    <a href="plan.html"><div>📈</div>পরিকল্পনা</a>
+    <a href="deposit.html"><div>💳</div>জমা</a>
+    <a href="game.html"><div>🎮</div>GAME</a>
+    <a href="withdraw.html"><div>🏧</div>উত্তোলন</a>
+    <a href="profile.html"><div>👤</div>প্রোফাইল</a>
+  </div>
 
-        const authForm = document.getElementById('authForm');
-        const formTitle = document.getElementById('formTitle');
-        const nameGroup = document.getElementById('nameGroup');
-        const submitBtn = document.getElementById('submitBtn');
-        const toggleBtn = document.getElementById('toggleBtn');
-        const msgBox = document.getElementById('msgBox');
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        toggleBtn.addEventListener('click', () => {
-            isLogin = !isLogin;
-            if (isLogin) {
-                formTitle.innerText = "User Login";
-                nameGroup.style.display = "none";
-                document.getElementById('fullName').removeAttribute('required');
-                submitBtn.innerText = "Login";
-                toggleBtn.innerText = "Don't have an account? Register";
-            } else {
-                formTitle.innerText = "User Registration";
-                nameGroup.style.display = "block";
-                document.getElementById('fullName').setAttribute('required', 'true');
-                submitBtn.innerText = "Register Account";
-                toggleBtn.innerText = "Already have an account? Login";
-            }
-        });
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
+      authDomain: "earn-money-54b9d.firebaseapp.com",
+      projectId: "earn-money-54b9d",
+      storageBucket: "earn-money-54b9d.firebasestorage.app",
+      messagingSenderId: "1048733611672",
+      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
+    };
 
-        authForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            msgBox.innerText = "Processing...";
-            msgBox.className = "msg";
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          document.getElementById('income-wallet').innerText = `৳${data.incomeWallet || 0}`;
+          document.getElementById('bonus-wallet').innerText = `৳${data.bonusWallet || 0}`;
+          document.getElementById('deposit-wallet').innerText = `৳${data.depositWallet || 0}`;
+          document.getElementById('turnover-left').innerText = `৳${data.turnover || 0}`;
+          document.getElementById('total-deposit').innerText = `৳${data.totalDeposit || 0}`;
+          document.getElementById('total-withdraw').innerText = `৳${data.totalWithdraw || 0}`;
+          document.getElementById('welcome-user').innerText = `Welcome back, ${data.name || 'User'} 👋`;
 
-            if (!isLogin) {
-                const fullName = document.getElementById('fullName').value;
-                try {
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    const user = userCredential.user;
-
-                    await setDoc(doc(db, "users", user.uid), {
-                        name: fullName,
-                        email: email,
-                        balance: 0,
-                        bonusWallet: 0,
-                        depositWallet: 0,
-                        createdAt: new Date()
-                    });
-
-                    msgBox.innerText = "Registration Successful!";
-                    msgBox.className = "msg success";
-                    setTimeout(() => { window.location.href = "dashboard.html"; }, 1500);
-                } catch (error) {
-                    msgBox.innerText = error.message;
-                    msgBox.className = "msg error";
-                }
-            } else {
-                try {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    msgBox.innerText = "Login Successful!";
-                    msgBox.className = "msg success";
-                    setTimeout(() => { window.location.href = "dashboard.html"; }, 1500);
-                } catch (error) {
-                    msgBox.innerText = error.message;
-                    msgBox.className = "msg error";
-                }
-            }
-        });
-    </script>
+          // যদি রোল এডমিন হয়, তবেই মুকুট শো করবে
+          if (data.role === 'admin' || data.role === 'sub-admin') {
+            document.getElementById('admin-crown').style.display = 'block';
+          }
+        }
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
 </body>
-        </html>
-        
+    </html>
+    
