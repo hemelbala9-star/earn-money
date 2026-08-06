@@ -1,0 +1,87 @@
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
+    authDomain: "earn-money-54b9d.firebaseapp.com",
+    projectId: "earn-money-54b9d",
+    storageBucket: "earn-money-54b9d.firebasestorage.app",
+    messagingSenderId: "1048733611672",
+    appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let userBets = { BIG: false, SMALL: false, amount: 0 };
+
+  // বেট প্লেস করার লজিক এবং ডাবল বেট চেক
+  window.placeBet = async function(type) {
+    const user = auth.currentUser;
+    if (!user) return alert("লগইন করুন!");
+    
+    const amount = Number(document.getElementById('bet-amount').value);
+    if (!amount || amount <= 0) return alert("সঠিক পরিমাণ দিন!");
+
+    if (type === 'BIG') userBets.BIG = true;
+    if (type === 'SMALL') userBets.SMALL = true;
+    userBets.amount = amount;
+
+    // ফায়ারবেসে বেট হিস্ট্রি আপডেট (এডমিন অ্যালার্টের জন্য)
+    await setDoc(doc(db, "game_settings", "live_bets"), {
+      [user.uid]: {
+        email: user.email,
+        hasBig: userBets.BIG,
+        hasSmall: userBets.SMALL
+      }
+    }, { merge: true });
+
+    document.getElementById('user-choice').innerText = `আপনার বেট: ${userBets.BIG ? 'BIG ' : ''}${userBets.SMALL ? 'SMALL' : ''} (৳${amount})`;
+  };
+
+  // এডমিন লজিক অনুযায়ী স্মার্ট রেজাল্ট জেনারেটর
+  async function generateSmartResult() {
+    const settingsSnap = await getDoc(doc(db, "game_settings", "big_small"));
+    let autoLoss = false;
+    let winRate = 50;
+
+    if (settingsSnap.exists()) {
+      autoLoss = settingsSnap.data().autoLoss;
+      winRate = settingsSnap.data().winRate;
+    }
+
+    let finalType = "";
+
+    // ১. অটো লস মোড অন থাকলে মেম্বারের উল্টো রেজাল্ট আসবে
+    if (autoLoss && (userBets.BIG || userBets.SMALL)) {
+      if (userBets.BIG && !userBets.SMALL) finalType = 'SMALL';
+      else if (userBets.SMALL && !userBets.BIG) finalType = 'BIG';
+      else finalType = Math.random() > 0.5 ? 'BIG' : 'SMALL';
+    } 
+    // ২. পার্সেন্টেজ অনুযায়ী রেজাল্ট নিয়ন্ত্রণ
+    else {
+      const isUserWin = (Math.random() * 100) < winRate;
+      if (userBets.BIG && !userBets.SMALL) {
+        finalType = isUserWin ? 'BIG' : 'SMALL';
+      } else if (userBets.SMALL && !userBets.BIG) {
+        finalType = isUserWin ? 'SMALL' : 'BIG';
+      } else {
+        finalType = Math.random() > 0.5 ? 'BIG' : 'SMALL';
+      }
+    }
+
+    // রেজাল্ট নম্বর জেনারেট (Big: 5-9, Small: 0-4)
+    let finalNumber = 0;
+    if (finalType === 'BIG') {
+      finalNumber = Math.floor(Math.random() * 5) + 5;
+    } else {
+      finalNumber = Math.floor(Math.random() * 5);
+    }
+
+    return { number: finalNumber, type: finalType };
+  }
+  </script>
+  
