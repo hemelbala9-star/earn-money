@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Earn Money</title>
+  <style>
+    body { background-color: #0b0e14; color: #fff; font-family: Arial, sans-serif; padding-bottom: 80px; }
+    .container { max-width: 450px; margin: auto; padding: 20px; }
+    .profile-card { background: #161b22; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #30363d; }
+    .avatar { width: 80px; height: 80px; background: #30363d; border-radius: 50%; margin: auto; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 10px; }
+    .info-group { margin-top: 20px; text-align: left; }
+    .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; font-size: 14px; }
+    
+    .wallet-bind { margin-top: 20px; padding: 15px; background: #1f242d; border-radius: 10px; }
+    input { width: 100%; padding: 10px; margin-top: 5px; background: #0b0e14; border: 1px solid #333; color: white; border-radius: 5px; }
+    button { width: 100%; padding: 10px; margin-top: 10px; background: #ffb703; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    
+    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; }
+    .bottom-nav a { color: #888; text-decoration: none; text-align: center; font-size: 11px; }
+    .bottom-nav a.active { color: #ffb703; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="profile-card">
+    <div class="avatar">👤</div>
+    <h3 id="user-name">User Name</h3>
+    <p style="color: #888; font-size: 12px;">ID: <span id="user-id">Loading...</span></p>
+  </div>
+
+  <div class="wallet-bind">
+    <h4>পেমেন্ট মেথড বাঁধাই করুন</h4>
+    <small style="color: #ff5252;">সতর্কতা: একবার সেভ করলে পরে এডিট করা যাবে না।</small>
+    <input type="text" id="p-method" placeholder="বিকাশ/নগদ">
+    <input type="text" id="p-number" placeholder="০১৭xxxxxxxx">
+    <button onclick="bindWallet()">সেভ করুন</button>
+  </div>
+
+  <div class="info-group">
+    <div class="info-row"><span>ইমেইল:</span> <span id="user-email">-</span></div>
+    <div class="info-row"><span>রেফার লিংক:</span> <span id="ref-link" style="color:#ffb703;">Copy Link</span></div>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="dashboard.html"><div>🏠</div>হোম</a>
+  <a href="game.html"><div>🎮</div>GAME</a>
+  <a href="profile.html" class="active"><div>👤</div>প্রোফাইল</a>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = { /* তোমার কনফিগ বসাও */ };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  // ডাটা লোড করা
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      const snap = await getDoc(doc(db, "users", user.uid));
+      const data = snap.data();
+      document.getElementById('user-name').innerText = data.name;
+      document.getElementById('user-id').innerText = user.uid.substring(0, 8);
+      document.getElementById('user-email').innerText = data.email;
+      
+      // যদি আগে থেকেই বাঁধানো থাকে, তবে ইনপুট ডিজেবল করে দাও
+      if (data.paymentNumber) {
+        document.getElementById('p-number').value = data.paymentNumber;
+        document.getElementById('p-number').disabled = true;
+        document.querySelector('button').style.display = 'none';
+      }
+    }
+  });
+
+  window.bindWallet = async () => {
+    const number = document.getElementById('p-number').value;
+    const user = auth.currentUser;
+    if(number.length < 10) return alert("সঠিক নম্বর দিন");
+    
+    await updateDoc(doc(db, "users", user.uid), { paymentNumber: number });
+    alert("সফলভাবে সেভ হয়েছে!");
+    location.reload();
+  }
+</script>
+</body>
+  </html>
+  
