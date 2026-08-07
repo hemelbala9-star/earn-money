@@ -1,126 +1,33 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লগইন - ইনভেস্টমেন্ট প্ল্যাটফর্ম</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0d0d0d;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .login-container {
-            background-color: #1a1a1a;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #330000;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #ff1a1a;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #cccccc;
-            font-size: 14px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            background-color: #262626;
-            border: 1px solid #444444;
-            border-radius: 5px;
-            color: #ffffff;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #ff1a1a;
-            box-shadow: 0 0 5px rgba(255, 26, 26, 0.5);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #ff1a1a;
-            border: none;
-            border-radius: 5px;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: #e00000;
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #aaaaaa;
-        }
-
-        .register-link a {
-            color: #ff1a1a;
-            text-decoration: none;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Earn Money - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-    <div class="login-container">
-        <h2>লগইন করুন</h2>
-        <form action="dashboard.html" method="POST">
-            <div class="input-group">
-                <label for="phone">ফোন নম্বর</label>
-                <input type="text" id="phone" name="phone" placeholder="আপনার ফোন নম্বর দিন" required>
+<body class="bg-[#121212] text-white flex justify-center items-center min-h-screen">
+    <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-6 rounded-2xl w-full max-w-sm shadow-xl">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-[#d4af37]">Earn Money</h1>
+            <p class="text-sm text-gray-400">Sign in to your account</p>
+        </div>
+        
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Email or Phone</label>
+                <input type="text" id="email" required class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-            
-            <div class="input-group">
-                <label for="password">পাসওয়ার্ড</label>
-                <input type="password" id="password" name="password" placeholder="আপনার পাসওয়ার্ড দিন" required>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Password</label>
+                <input type="password" id="password" required class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-
-            <button type="submit" class="login-btn">লগইন</button>
+            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2.5 rounded-lg shadow-lg hover:opacity-90 transition">Login</button>
         </form>
 
-        <div class="register-link">
-            একাউন্ট নেই? <a href="register.html">রেজিস্ট্রেশন করুন</a>
-        </div>
+        <p class="text-center text-xs text-gray-400 mt-4">
+            Don't have an account? <a href="register.html" class="text-[#d4af37] font-semibold">Register</a>
+        </p>
     </div>
-
 </body>
 </html>
