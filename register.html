@@ -1,193 +1,41 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রেজিস্ট্রেশন - ইনভেস্টমেন্ট প্ল্যাটফর্ম</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #080808;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .brand-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: bold;
-            color: #fff;
-            margin: 0 auto 10px;
-            box-shadow: 0 0 15px rgba(230, 0, 0, 0.4);
-        }
-
-        .brand-header h1 {
-            color: #ff2a2a;
-            font-size: 22px;
-        }
-
-        .brand-header p {
-            color: #888888;
-            font-size: 12px;
-            margin-top: 3px;
-        }
-
-        .card {
-            background: linear-gradient(180deg, #140404 0%, #0d0d0d 100%);
-            border: 1px solid #3d0a0a;
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-        }
-
-        .tab-container {
-            display: flex;
-            background: #080808;
-            border-radius: 10px;
-            padding: 4px;
-            margin-bottom: 20px;
-            border: 1px solid #2b0808;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            background: transparent;
-            border: none;
-            color: #888888;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(230, 0, 0, 0.3);
-        }
-
-        .input-group {
-            margin-bottom: 12px;
-        }
-
-        label {
-            font-size: 12px;
-            color: #aaaaaa;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        input {
-            width: 100%;
-            padding: 11px 15px;
-            background: #080808;
-            border: 1px solid #330000;
-            color: white;
-            border-radius: 10px;
-            font-size: 14px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: #ff1a1a;
-            box-shadow: 0 0 5px rgba(255, 26, 26, 0.4);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 13px;
-            margin-top: 10px;
-            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
-            color: #fff;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 15px;
-            box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-
-        .submit-btn:hover {
-            opacity: 0.9;
-        }
-    </style>
+    <title>Earn Money - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-<div class="container">
-    <div class="brand-header">
-        <div class="logo-icon">৳</div>
-        <h1>Earn Money</h1>
-        <p>স্মার্ট ইনভেস্টমেন্ট প্ল্যাটফর্ম</p>
-    </div>
-
-    <div class="card">
-        <div class="tab-container">
-            <a href="index.html" class="tab-btn">🔑 লগইন</a>
-            <a href="register.html" class="tab-btn active">📝 রেজিস্ট্রেশন</a>
+<body class="bg-[#121212] text-white flex justify-center items-center min-h-screen">
+    <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-6 rounded-2xl w-full max-w-sm shadow-xl">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-[#d4af37]">Earn Money</h1>
+            <p class="text-sm text-gray-400">Create a new account</p>
         </div>
-
-        <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
-            <div class="input-group">
-                <label>পূর্ণ নাম</label>
-                <input type="text" placeholder="আপনার নাম লিখুন" required>
+        
+        <form id="registerForm" class="space-y-4">
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Full Name</label>
+                <input type="text" id="name" required class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-
-            <div class="input-group">
-                <label>ফোন নম্বর</label>
-                <input type="text" placeholder="01XXXXXXXXX" required>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Email or Phone</label>
+                <input type="text" id="email" required class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-
-            <div class="input-group">
-                <label>ইমেইল</label>
-                <input type="email" placeholder="example@gmail.com" required>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Password</label>
+                <input type="password" id="password" required class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-
-            <div class="input-group">
-                <label>পাসওয়ার্ড</label>
-                <input type="password" placeholder="কমপক্ষে ৬ ডিজিট" required>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Referral Code (Optional)</label>
+                <input type="text" id="referralCode" class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-
-            <div class="input-group">
-                <label>রেফারেল কোড (ঐচ্ছিক)</label>
-                <input type="text" placeholder="কোড থাকলে দিন">
-            </div>
-
-            <button type="submit" class="submit-btn">একাউন্ট তৈরি করুন →</button>
+            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2.5 rounded-lg shadow-lg hover:opacity-90 transition">Register</button>
         </form>
-    </div>
-</div>
 
+        <p class="text-center text-xs text-gray-400 mt-4">
+            Already have an account? <a href="login.html" class="text-[#d4af37] font-semibold">Login</a>
+        </p>
+    </div>
 </body>
 </html>
