@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ড্যাশবোর্ড - ইনভেস্টমেন্ট প্ল্যাটফর্ম</title>
+    <title>Dashboard - Earn Money</title>
     <style>
         * {
             margin: 0;
@@ -13,24 +13,26 @@
         }
 
         body {
-            background-color: #0d0d0d;
+            background-color: #080808;
             color: #ffffff;
-            padding-bottom: 70px;
+            padding-bottom: 75px;
         }
 
         /* Top Header */
         .header {
-            background-color: #1a1a1a;
-            padding: 15px 20px;
+            background: linear-gradient(180deg, #120202 0%, #080808 100%);
+            padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #330000;
+            border-bottom: 1px solid #260505;
         }
 
-        .header h1 {
+        .brand-title {
             font-size: 20px;
-            color: #ff1a1a;
+            font-weight: bold;
+            color: #ff2a2a;
+            letter-spacing: 0.5px;
         }
 
         .header-icons {
@@ -41,41 +43,43 @@
 
         .admin-crown {
             font-size: 20px;
-            display: none; /* ডিফল্টভাবে লুকিয়ে থাকবে, জাস্টিফাই করে শো করা হবে */
             cursor: pointer;
+            display: none; /* ডিফল্টভাবে লুকিয়ে থাকবে, অ্যাডমিন হলে শো করবে */
         }
 
         .bell-icon {
             font-size: 18px;
-            color: #cccccc;
+            color: #b3b3b3;
             cursor: pointer;
         }
 
         /* Dual Wallets Container */
         .wallets-container {
             display: flex;
-            gap: 15px;
-            margin: 20px;
+            gap: 12px;
+            margin: 15px 20px;
         }
 
         .wallet-card {
             flex: 1;
-            background: linear-gradient(135deg, #1a1a1a, #261a1a);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #ff1a1a;
-            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.15);
+            background: linear-gradient(135deg, #150505 0%, #1f0808 100%);
+            padding: 16px 12px;
+            border-radius: 14px;
+            border: 1px solid #3d0a0a;
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.08);
             text-align: center;
         }
 
         .wallet-card h3 {
-            font-size: 12px;
-            color: #aaaaaa;
-            margin-bottom: 5px;
+            font-size: 11px;
+            color: #999999;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .wallet-card h2 {
-            font-size: 20px;
+            font-size: 18px;
             color: #ffffff;
             font-weight: bold;
         }
@@ -83,92 +87,48 @@
         /* Action Buttons */
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin: 0 20px 20px 20px;
         }
 
         .action-btn {
             flex: 1;
-            padding: 12px;
-            background-color: #ff1a1a;
+            padding: 13px;
+            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
             color: #ffffff;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
+            box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
             transition: 0.3s;
         }
 
         .action-btn:hover {
-            background-color: #e00000;
+            opacity: 0.9;
         }
 
         .action-btn.secondary {
-            background-color: #262626;
-            border: 1px solid #444444;
-        }
-
-        .action-btn.secondary:hover {
-            background-color: #333333;
+            background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+            border: 1px solid #333333;
+            box-shadow: none;
+            color: #cccccc;
         }
 
         /* Section Title */
         .section-title {
-            margin: 0 20px 15px 20px;
-            font-size: 18px;
-            color: #ff1a1a;
-            border-left: 4px solid #ff1a1a;
+            margin: 0 20px 12px 20px;
+            font-size: 16px;
+            color: #ff2a2a;
+            font-weight: bold;
+            border-left: 3px solid #ff2a2a;
             padding-left: 8px;
         }
 
-        /* Investment Plans */
-        .plans-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 0 20px 20px 20px;
-        }
-
-        .plan-card {
-            background-color: #1a1a1a;
-            border: 1px solid #330000;
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .plan-info h4 {
-            font-size: 16px;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .plan-info p {
-            font-size: 13px;
-            color: #aaaaaa;
-        }
-
-        .invest-btn {
-            background-color: #ff1a1a;
-            color: #ffffff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .invest-btn:hover {
-            background-color: #e00000;
-        }
-
-        /* History Summary Section */
+        /* History Summary Grid */
         .history-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -177,166 +137,62 @@
         }
 
         .history-box {
-            background-color: #1a1a1a;
-            border: 1px solid #330000;
-            padding: 12px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #120404 0%, #170707 100%);
+            border: 1px solid #2b0808;
+            padding: 14px 10px;
+            border-radius: 12px;
             text-align: center;
         }
 
         .history-box span {
-            font-size: 12px;
-            color: #aaaaaa;
+            font-size: 11px;
+            color: #8c8c8c;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
         .history-box h4 {
-            font-size: 16px;
-            color: #ff1a1a;
+            font-size: 15px;
+            color: #ff4d4d;
         }
 
-        /* Bottom Navigation Bar */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #1a1a1a;
-            border-top: 1px solid #330000;
+        /* Investment Plans Section */
+        .plans-container {
             display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
+            flex-direction: column;
+            gap: 12px;
+            margin: 0 20px 25px 20px;
         }
 
-        .nav-item {
-            text-align: center;
-            color: #888888;
-            text-decoration: none;
+        .plan-card {
+            background: linear-gradient(135deg, #140404 0%, #1a0808 100%);
+            border: 1px solid #330a0a;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .plan-info h4 {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .plan-info p {
             font-size: 12px;
-            transition: 0.3s;
+            color: #a6a6a6;
+        }
+
+        .invest-btn {
+            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
             cursor: pointer;
-        }
-
-        .nav-item.active, .nav-item:hover {
-            color: #ff1a1a;
-        }
-
-        .nav-item span {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 2px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <h1>Earn Money</h1>
-        <div class="header-icons">
-            <span class="bell-icon">🔔</span>
-            <span class="admin-crown" id="adminCrown" onclick="goToAdmin()" title="অ্যাডমিন প্যানেল">👑</span>
-        </div>
-    </div>
-
-    <div class="wallets-container">
-        <div class="wallet-card">
-            <h3>ডিপোজিট ওয়ালেট</h3>
-            <h2 id="depositWallet">৳ 0.00</h2>
-        </div>
-        <div class="wallet-card">
-            <h3>ইনকাম ওয়ালেট</h3>
-            <h2 id="incomeWallet">৳ 0.00</h2>
-        </div>
-    </div>
-
-    <div class="action-buttons">
-        <a href="deposit.html" class="action-btn">ডিপোজিট করুন</a>
-        <a href="withdraw.html" class="action-btn secondary">উত্তোলন করুন</a>
-    </div>
-
-    <div class="section-title">হিস্ট্রি সারাংশ</div>
-    <div class="history-grid">
-        <div class="history-box">
-            <span>মোট ডিপোজিট</span>
-            <h4 id="totalDeposit">৳ 0.00</h4>
-        </div>
-        <div class="history-box">
-            <span>মোট উত্তোলন</span>
-            <h4 id="totalWithdraw">৳ 0.00</h4>
-        </div>
-        <div class="history-box">
-            <span>মোট লাভ / প্রফিট</span>
-            <h4 id="totalProfit">৳ 0.00</h4>
-        </div>
-        <div class="history-box">
-            <span>মোট রেফার বোনাস</span>
-            <h4 id="totalRefer">৳ 0.00</h4>
-        </div>
-    </div>
-
-    <div class="section-title" id="plansSection">বিনিয়োগ প্ল্যানসমূহ</div>
-    <div class="plans-container">
-        <div class="plan-card">
-            <div class="plan-info">
-                <h4>স্টার্টার প্ল্যান</h4>
-                <p>মূল্য: ৳১৯৯ | দৈনিক আয়: ৳৩০</p>
-            </div>
-            <button class="invest-btn" onclick="buyPlan(199, 'স্টার্টার প্ল্যান')">কিনুন</button>
-        </div>
-
-        <div class="plan-card">
-            <div class="plan-info">
-                <h4>ব্রোঞ্জ প্ল্যান</h4>
-                <p>মূল্য: ৳২৯৯ | দৈনিক আয়: ৳৫০</p>
-            </div>
-            <button class="invest-btn" onclick="buyPlan(299, 'ব্রোঞ্জ প্ল্যান')">কিনুন</button>
-        </div>
-
-        <div class="plan-card">
-            <div class="plan-info">
-                <h4>গোল্ড প্ল্যান</h4>
-                <p>মূল্য: ৳৮৯৯ | দৈনিক আয়: ৳১৬০</p>
-            </div>
-            <button class="invest-btn" onclick="buyPlan(899, 'গোল্ড প্ল্যান')">কিনুন</button>
-        </div>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <span>🏠</span>হোম
-        </a>
-        <a href="dashboard.html#plansSection" class="nav-item">
-            <span>📊</span>পরিকল্পনা
-        </a>
-        <a href="task.html" class="nav-item">
-            <span>📋</span>টাস্ক
-        </a>
-        <a href="referral.html" class="nav-item">
-            <span>👥</span>রেফারেল
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span>👤</span>প্রোফাইল
-        </a>
-    </div>
-
-    <script>
-        // ডেমো চেক: যদি ইউজার রোল অ্যাডমিন হয় তবে মুকুট (👑) দেখাবে
-        // প্রজেক্টে ফায়ারবেস বা লোকালস্টোরেজ থেকে রোল চেক করে এটি ডাইনামিক করা যাবে।
-        const userRole = "admin"; // টেস্টের জন্য "admin" দেওয়া হলো, সাধারণ ইউজারের ক্ষেত্রে "user" হবে।
+            box-shadow: 0 3px 10px rgba(230, 0, 0, 0.2
         
-        if (userRole === "admin") {
-            document.getElementById("adminCrown").style.display = "inline-block";
-        }
-
-        function goToAdmin() {
-            window.location.href = "admin.html";
-        }
-
-        function buyPlan(price, planName) {
-            alert(planName + " কিনতে সফলভাবে রিকোয়েস্ট পাঠানো হয়েছে। মূল্য: ৳" + price);
-        }
-    </script>
-</body>
-    </html>
-    
