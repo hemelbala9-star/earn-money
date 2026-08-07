@@ -1,325 +1,55 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Earn Money</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #080808;
-            color: #ffffff;
-            padding-bottom: 75px;
-        }
-
-        /* Top Header */
-        .header {
-            background: linear-gradient(180deg, #120202 0%, #080808 100%);
-            padding: 18px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #260505;
-        }
-
-        .brand-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ff2a2a;
-        }
-
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .admin-crown {
-            font-size: 20px;
-            cursor: pointer;
-            display: none; /* অ্যাডমিন হলে শো করবে */
-        }
-
-        .bell-icon {
-            font-size: 18px;
-            color: #b3b3b3;
-            cursor: pointer;
-        }
-
-        /* Dual Wallets Container */
-        .wallets-container {
-            display: flex;
-            gap: 12px;
-            margin: 15px 20px;
-        }
-
-        .wallet-card {
-            flex: 1;
-            background: linear-gradient(135deg, #150505 0%, #1f0808 100%);
-            padding: 16px 12px;
-            border-radius: 14px;
-            border: 1px solid #3d0a0a;
-            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .wallet-card h3 {
-            font-size: 11px;
-            color: #999999;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
-        .wallet-card h2 {
-            font-size: 18px;
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            margin: 0 20px 20px 20px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 13px;
-            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
-        }
-
-        .action-btn.secondary {
-            background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
-            border: 1px solid #333333;
-            box-shadow: none;
-            color: #cccccc;
-        }
-
-        /* Section Title */
-        .section-title {
-            margin: 0 20px 12px 20px;
-            font-size: 16px;
-            color: #ff2a2a;
-            font-weight: bold;
-            border-left: 3px solid #ff2a2a;
-            padding-left: 8px;
-        }
-
-        /* History Summary Grid */
-        .history-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 0 20px 20px 20px;
-        }
-
-        .history-box {
-            background: linear-gradient(135deg, #120404 0%, #170707 100%);
-            border: 1px solid #2b0808;
-            padding: 14px 10px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .history-box span {
-            font-size: 11px;
-            color: #8c8c8c;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .history-box h4 {
-            font-size: 15px;
-            color: #ff4d4d;
-        }
-
-        /* Investment Plans Section */
-        .plans-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 0 20px 25px 20px;
-        }
-
-        .plan-card {
-            background: linear-gradient(135deg, #140404 0%, #1a0808 100%);
-            border: 1px solid #330a0a;
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .plan-info h4 {
-            font-size: 15px;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .plan-info p {
-            font-size: 12px;
-            color: #a6a6a6;
-        }
-
-        .invest-btn {
-            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
-            color: #ffffff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(230, 0, 0, 0.25);
-        }
-
-        /* Bottom Navigation Bar */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #0c0202;
-            border-top: 1px solid #260505;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 1000;
-        }
-
-        .nav-item {
-            text-align: center;
-            color: #737373;
-            text-decoration: none;
-            font-size: 11px;
-            cursor: pointer;
-        }
-
-        .nav-item.active, .nav-item:hover {
-            color: #ff2a2a;
-        }
-
-        .nav-item span {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 2px;
-        }
-    </style>
+    <title>Earn Money - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#121212] text-white min-h-screen pb-16">
+    <!-- Top Header -->
+    <header class="bg-[#1e1e1e] border-b border-[#d4af37]/20 p-4 flex justify-between items-center sticky top-0 z-50">
+        <h1 class="text-xl font-bold text-[#d4af37]">Earn Money</h1>
+        <div class="flex items-center gap-3">
+            <span class="bg-[#2a2a2a] px-3 py-1 rounded-full text-xs border border-[#d4af37]/30">🇧🇩 ৳0.00</span>
+            <a href="login.html" class="bg-red-500/20 text-red-400 p-1.5 rounded-lg text-xs">🚪 Logout</a>
+        </div>
+    </header>
 
-    <div class="header">
-        <div class="brand-title">Earn Money</div>
-        <div class="header-icons">
-            <span class="bell-icon">🔔</span>
-            <span class="admin-crown" id="adminCrown" onclick="goToAdmin()">👑</span>
-        </div>
-    </div>
-
-    <div class="wallets-container">
-        <div class="wallet-card">
-            <h3>ডিপোজিট ওয়ালেট</h3>
-            <h2>৳ 0.00</h2>
-        </div>
-        <div class="wallet-card">
-            <h3>ইনকাম ওয়ালেট</h3>
-            <h2>৳ 0.00</h2>
-        </div>
-    </div>
-
-    <div class="action-buttons">
-        <a href="deposit.html" class="action-btn">ডিপোজিট করুন</a>
-        <a href="withdraw.html" class="action-btn secondary">উত্তোলন করুন</a>
-    </div>
-
-    <div class="section-title">হিস্ট্রি সারাংশ</div>
-    <div class="history-grid">
-        <div class="history-box">
-            <span>মোট ডিপোজিট</span>
-            <h4>৳ 0.00</h4>
-        </div>
-        <div class="history-box">
-            <span>মোট উত্তোলন</span>
-            <h4>৳ 0.00</h4>
-        </div>
-        <div class="history-box">
-            <span>মোট লাভ / প্রফিট</span>
-            <h4>৳ 0.00</h4>
-        </div>
-        <div class="history-box">
-            <span>মোট রেফার বোনাস</span>
-            <h4>৳ 0.00</h4>
-        </div>
-    </div>
-
-    <div class="section-title" id="plansSection">বিনিয়োগ প্ল্যানসমূহ</div>
-    <div class="plans-container">
-        <div class="plan-card">
-            <div class="plan-info">
-                <h4>স্টার্টার প্ল্যান</h4>
-                <p>মূল্য: ৳১৯৯ | দৈনিক আয়: ৳৩০</p>
+    <!-- Main Content -->
+    <main class="p-4 space-y-4 max-w-md mx-auto">
+        <!-- Balance Card -->
+        <div class="bg-gradient-to-r from-[#1e1e1e] to-[#2a2a2a] border border-[#d4af37]/40 p-5 rounded-2xl shadow-xl">
+            <p class="text-xs text-gray-400">Total Balance</p>
+            <h2 class="text-3xl font-extrabold text-[#d4af37] my-1">৳0.00</h2>
+            <div class="flex gap-2 mt-4">
+                <a href="deposit.html" class="flex-1 bg-amber-500 text-black text-center py-2 rounded-lg font-semibold text-sm">Deposit</a>
+                <a href="withdraw.html" class="flex-1 bg-[#333] text-white text-center py-2 rounded-lg font-semibold text-sm border border-gray-600">Withdraw</a>
             </div>
-            <button class="invest-btn" onclick="buyPlan(199, 'স্টার্টার প্ল্যান')">কিনুন</button>
         </div>
 
-        <div class="plan-card">
-            <div class="plan-info">
-                <h4>ব্রোঞ্জ প্ল্যান</h4>
-                <p>মূল্য: ৳২৯৯ | দৈনিক আয়: ৳৫০</p>
-            </div>
-            <button class="invest-btn" onclick="buyPlan(299, 'ব্রোঞ্জ প্ল্যান')">কিনুন</button>
+        <!-- Quick Links Grid -->
+        <div class="grid grid-cols-3 gap-3">
+            <a href="game.html" class="bg-[#1e1e1e] border border-gray-800 p-4 rounded-xl text-center hover:border-[#d4af37] transition">
+                <span class="text-2xl">🎮</span>
+                <p class="text-xs mt-2 text-gray-300">Games</p>
+            </a>
+            <a href="task.html" class="bg-[#1e1e1e] border border-gray-800 p-4 rounded-xl text-center hover:border-[#d4af37] transition">
+                <span class="text-2xl">📋</span>
+                <p class="text-xs mt-2 text-gray-300">Tasks</p>
+            </a>
+            <a href="referral.html" class="bg-[#1e1e1e] border border-gray-800 p-4 rounded-xl text-center hover:border-[#d4af37] transition">
+                <span class="text-2xl">👥</span>
+                <p class="text-xs mt-2 text-gray-300">Referral</p>
+            </a>
         </div>
-    </div>
+    </main>
 
-    <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <span>🏠</span>হোম
-        </a>
-        <a href="#plansSection" class="nav-item">
-            <span>📊</span>পরিকল্পনা
-        </a>
-        <a href="task.html" class="nav-item">
-            <span>📋</span>টাস্ক
-        </a>
-        <a href="referral.html" class="nav-item">
-            <span>👥</span>রেফারেল
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span>👤</span>প্রোফাইল
-        </a>
-    </div>
-
-    <script>
-        // ইউজার রোল admin হলে মুকুট দেখাবে
-        const userRole = "admin"; 
-        if (userRole === "admin") {
-            document.getElementById("adminCrown").style.display = "inline-block";
-        }
-
-        function goToAdmin() {
-            window.location.href = "admin.html";
-        }
-
-        function buyPlan(price, name) {
-            alert(name + " কেনার রিকোয়েস্ট পাঠানো হয়েছে। মূল্য: ৳" + price);
-        }
-    </script>
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#1e1e1e] border-t border-[#d4af37]/20 flex justify-around py-3">
+        <a href="dashboard.html" class="text-[#d4af37] text-xs text-center">🏠<br>Home</a>
+        <a href="game.html" class="text-gray-400 text-xs text-center">🎮<br>Games</a>
+        <a href="profile.html" class="text-gray-400 text-xs text-center">👤<br>Profile</a>
+    </nav>
 </body>
 </html>
