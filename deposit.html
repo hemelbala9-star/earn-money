@@ -1,109 +1,42 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deposit - Earn Money</title>
-  <style>
-    body { background-color: #0b0e14; color: #fff; font-family: Arial, sans-serif; padding-bottom: 80px; }
-    .container { max-width: 450px; margin: auto; padding: 20px; }
-    .card { background: #161b22; padding: 20px; border-radius: 15px; border: 1px solid #30363d; margin-bottom: 15px; }
-    h2 { color: #ffb703; text-align: center; font-size: 20px; margin-bottom: 15px; }
-    label { font-size: 13px; color: #8b949e; display: block; margin-top: 10px; }
-    input, select { width: 100%; padding: 12px; margin-top: 5px; background: #0b0e14; border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; }
-    button { width: 100%; padding: 13px; margin-top: 20px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); color: #000; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
-    .notice { background: #1f242d; border-left: 4px solid #ffb703; padding: 12px; font-size: 13px; color: #ccc; border-radius: 4px; margin-bottom: 15px; }
-    
-    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 1000; }
-    .bottom-nav a { color: #888; text-decoration: none; text-align: center; font-size: 11px; }
-    .bottom-nav a.active { color: #ffb703; }
-    .bottom-nav div { font-size: 18px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Money - Deposit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#121212] text-white min-h-screen pb-16">
+    <!-- Top Header -->
+    <header class="bg-[#1e1e1e] border-b border-[#d4af37]/20 p-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <a href="dashboard.html" class="text-[#d4af37] text-lg font-bold">←</a>
+            <h1 class="text-lg font-bold text-[#d4af37]">Deposit Money</h1>
+        </div>
+    </header>
 
-<div class="container">
-  <h2>টাকা ডিপোজিট করুন</h2>
+    <!-- Main Content -->
+    <main class="p-4 space-y-4 max-w-md mx-auto">
+        <!-- Deposit Instructions / Methods -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-5 rounded-2xl shadow-xl space-y-4">
+            <p class="text-xs text-gray-400">Select Payment Method</p>
+            <div class="grid grid-cols-2 gap-3">
+                <button class="bg-[#2a2a2a] border border-[#d4af37] p-3 rounded-xl text-center font-semibold text-sm">bKash</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 p-3 rounded-xl text-center font-semibold text-sm">Nagad</button>
+            </div>
 
-  <div class="notice">
-    <b>নির্দেশনা:</b> নিচে দেওয়া বিকাশ/নগদ নাম্বারে টাকা পাঠিয়ে ট্রানজেকশন আইডি (TrxID) ও পরিমাণ দিয়ে সাবমিট করুন। এডমিন চেক করে আপনার ডিপোজিট ওয়ালেটে টাকা যোগ করে দেবেন।
-  </div>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Enter Amount (BDT)</label>
+                <input type="number" id="depositAmount" placeholder="e.g. 500" class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
+            </div>
 
-  <div class="card">
-    <label>পেমেন্ট মাধ্যম সিলেক্ট করুন</label>
-    <select id="gateway">
-      <option value="bKash">বিকাশ (Personal)</option>
-      <option value="Nagad">নগদ (Personal)</option>
-    </select>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Transaction ID (TrxID)</label>
+                <input type="text" id="trxId" placeholder="Enter Transaction ID" class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
+            </div>
 
-    <label>টাকার পরিমাণ (BDT)</label>
-    <input type="number" id="dep-amount" placeholder="যেমন: ৫০০">
-
-    <label>ট্রানজেকশন আইডি (TrxID)</label>
-    <input type="text" id="trx-id" placeholder="টাকা পাঠিয়ে TrxID লিখুন">
-
-    <button onclick="submitDeposit()">ডिपোজিট নিশ্চিত করুন</button>
-  </div>
-</div>
-
-<div class="bottom-nav">
-  <a href="dashboard.html"><div>🏠</div>হোম</a>
-  <a href="plan.html"><div>📈</div>পরিকল্পনা</a>
-  <a href="deposit.html" class="active"><div>💳</div>জমা</a>
-  <a href="game.html"><div>🎮</div>GAME</a>
-  <a href="withdraw.html"><div>🏧</div>উত্তোলন</a>
-  <a href="profile.html"><div>👤</div>প্রোফাইল</a>
-</div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-    authDomain: "earn-money-54b9d.firebaseapp.com",
-    projectId: "earn-money-54b9d",
-    storageBucket: "earn-money-54b9d.firebasestorage.app",
-    messagingSenderId: "1048733611672",
-    appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  window.submitDeposit = async () => {
-    const user = auth.currentUser;
-    if (!user) return alert("লগইন করা নেই!");
-
-    const gateway = document.getElementById('gateway').value;
-    const amount = Number(document.getElementById('dep-amount').value);
-    const trxId = document.getElementById('trx-id').value;
-
-    if (!amount || amount <= 0 || !trxId) {
-      alert("সঠিক পরিমাণ এবং TrxID দিন!");
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, "deposits"), {
-        uid: user.uid,
-        email: user.email,
-        gateway: gateway,
-        amount: amount,
-        trxId: trxId,
-        status: "pending",
-        timestamp: serverTimestamp()
-      });
-
-      alert("আপনার ডিপোজিট রিকোয়েস্ট সফলভাবে সাবমিট হয়েছে!");
-      document.getElementById('dep-amount').value = '';
-      document.getElementById('trx-id').value = '';
-    } catch (error) {
-      alert("ত্রুটি: " + error.message);
-    }
-  }
-</script>
+            <button class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2.5 rounded-lg shadow-lg hover:opacity-90 transition">Submit Deposit</button>
+        </div>
+    </main>
 </body>
 </html>
