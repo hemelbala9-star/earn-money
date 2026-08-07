@@ -1,144 +1,217 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Earn Money</title>
-  <style>
-    body { background-color: #0b0e14; color: #ffffff; font-family: Arial, sans-serif; margin: 0; padding-bottom: 70px; }
-    .header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #12161f; border-bottom: 1px solid #222; }
-    .logo-area { display: flex; align-items: center; gap: 8px; color: #ffb703; font-weight: bold; font-size: 18px; }
-    .icons-area { display: flex; gap: 12px; align-items: center; }
-    .icon-btn { background: #1f242d; border: 1px solid #333; padding: 6px 10px; border-radius: 50%; color: #fff; cursor: pointer; }
-    
-    .container { padding: 15px; max-width: 500px; margin: auto; }
-    
-    /* Main Income Wallet Card */
-    .main-wallet { background: linear-gradient(135deg, #1b1f2b 0%, #12151d 100%); border: 2px solid #e2a014; border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(226,160,20,0.15); }
-    .wallet-title { font-size: 12px; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; }
-    .wallet-amount { font-size: 32px; font-weight: bold; color: #ffb703; margin: 8px 0; }
-    
-    /* Sub Wallets Grid */
-    .sub-wallets { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-    .sub-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 12px; text-align: center; }
-    .bonus-card { border-color: #2ea043; }
-    .deposit-card { border-color: #1f6feb; }
-    
-    /* Stats Grid */
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-    .stat-box { background: #161b22; border: 1px solid #222; border-radius: 10px; padding: 12px; text-align: center; }
-    .stat-val { font-size: 18px; font-weight: bold; color: #ff5252; }
-    
-    /* Turnover Info Box */
-    .turnover-box { background: #1e1e2e; border: 1px solid #ffb703; border-radius: 10px; padding: 12px; margin-bottom: 15px; font-size: 13px; text-align: center; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Money - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    /* Bottom Nav */
-    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; z-index: 1000; }
-    .bottom-nav a { color: #888; text-decoration: none; text-align: center; font-size: 11px; }
-    .bottom-nav a.active { color: #ffb703; }
-    .bottom-nav div { font-size: 18px; }
-  </style>
+        body {
+            background-color: #080808;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #ff1a1a 0%, #990000 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 auto 8px;
+            box-shadow: 0 0 20px rgba(255, 26, 26, 0.3);
+        }
+
+        .brand-header h1 {
+            color: #ff2a2a;
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .brand-header p {
+            color: #888888;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, #140404 0%, #0d0d0d 100%);
+            border: 1px solid #3d0a0a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .tab-container {
+            display: flex;
+            background: #080808;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #2b0808;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: #888888;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(230, 0, 0, 0.3);
+        }
+
+        label {
+            font-size: 12px;
+            color: #aaaaaa;
+            display: block;
+            margin-top: 12px;
+        }
+
+        .input-box {
+            position: relative;
+            margin-top: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 15px;
+            background: #080808;
+            border: 1px solid #330000;
+            color: white;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #ff1a1a;
+            box-shadow: 0 0 5px rgba(255, 26, 26, 0.4);
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888888;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(230, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="logo-area">
-      <span style="background: #ffb703; padding: 5px 10px; border-radius: 6px; color:#000;">৳</span> Earn Money
-    </div>
-    <div class="icons-area">
-      <span>🇧🇩</span>
-      <div class="icon-btn">🔔</div>
-      <!-- রয়্যাল মুকুট - শুধু এডমিন দেখতে পাবে -->
-      <div id="admin-crown" class="icon-btn" style="display: none; background: #e2a014; color: #000;" onclick="location.href='admin.html'">👑</div>
-    </div>
-  </div>
-
-  <div class="container">
-    <!-- Main Income Wallet -->
-    <div class="main-wallet">
-      <div class="wallet-title">TOTAL BALANCE (INCOME WALLET)</div>
-      <div class="wallet-amount" id="income-wallet">৳0.00</div>
-      <div style="font-size: 13px; color: #ccc;" id="welcome-user">Welcome back, User 👋</div>
+<div class="container">
+    <div class="brand-header">
+        <div class="logo-icon">৳</div>
+        <h1>Earn Money</h1>
+        <p>স্মার্ট বিনিয়োগ প্ল্যাটফর্ম</p>
     </div>
 
-    <!-- Bonus & Deposit Wallets -->
-    <div class="sub-wallets">
-      <div class="sub-card bonus-card">
-        <div style="font-size: 12px; color: #2ea043;">🎁 Bonus Wallet</div>
-        <div id="bonus-wallet" style="font-size: 20px; font-weight: bold; margin-top: 5px;">৳0.00</div>
-      </div>
-      <div class="sub-card deposit-card">
-        <div style="font-size: 12px; color: #58a6ff;">💳 Deposit Wallet</div>
-        <div id="deposit-wallet" style="font-size: 20px; font-weight: bold; margin-top: 5px;">৳0.00</div>
-      </div>
+    <div class="card">
+        <div class="tab-container">
+            <a href="index.html" class="tab-btn active">🔑 লগইন</a>
+            <a href="register.html" class="tab-btn">📝 রেজিস্ট্রেশন</a>
+        </div>
+
+        <div>
+            <label>ইমেইল</label>
+            <input type="email" id="login-email" placeholder="myss@gmail.com">
+
+            <label>পাসওয়ার্ড</label>
+            <div class="input-box">
+                <input type="password" id="login-password" placeholder="পাসওয়ার্ড দিন">
+                <span class="eye-icon" onclick="togglePassword('login-password', this)">👁️</span>
+            </div>
+
+            <button class="submit-btn" onclick="handleLogin()">লগইন →</button>
+        </div>
     </div>
+</div>
 
-    <!-- Turnover Requirement Box -->
-    <div class="turnover-box">
-      <div>টার্নওভার বাকি (Turnover Required): <b id="turnover-left" style="color:#ffb703;">৳0</b></div>
-      <small style="color: #aaa;">উত্তোলন করতে হলে গেম খেলে এই টার্নওভার শূন্য করতে হবে।</small>
-    </div>
-
-    <!-- Stats Boxes -->
-    <div class="stats-grid">
-      <div class="stat-box"><div id="total-deposit" class="stat-val" style="color:#2ea043;">৳0</div><small style="color:#888;">TOTAL DEPOSIT</small></div>
-      <div class="stat-box"><div id="total-withdraw" class="stat-val">৳0</div><small style="color:#888;">WITHDRAWN</small></div>
-      <div class="stat-box"><div id="total-profit" class="stat-val" style="color:#ffb703;">৳0</div><small style="color:#888;">PROFIT EARNED</small></div>
-      <div class="stat-box"><div id="total-ref-bonus" class="stat-val" style="color:#58a6ff;">৳0</div><small style="color:#888;">REFERRAL BONUS</small></div>
-    </div>
-  </div>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <a href="dashboard.html" class="active"><div>🏠</div>হোম</a>
-    <a href="plan.html"><div>📈</div>পরিকল্পনা</a>
-    <a href="deposit.html"><div>💳</div>জমা</a>
-    <a href="game.html"><div>🎮</div>GAME</a>
-    <a href="withdraw.html"><div>🏧</div>উত্তোলন</a>
-    <a href="profile.html"><div>👤</div>প্রোফাইল</a>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-      authDomain: "earn-money-54b9d.firebaseapp.com",
-      projectId: "earn-money-54b9d",
-      storageBucket: "earn-money-54b9d.firebasestorage.app",
-      messagingSenderId: "1048733611672",
-      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-          const data = userDoc.data();
-          document.getElementById('income-wallet').innerText = `৳${data.incomeWallet || 0}`;
-          document.getElementById('bonus-wallet').innerText = `৳${data.bonusWallet || 0}`;
-          document.getElementById('deposit-wallet').innerText = `৳${data.depositWallet || 0}`;
-          document.getElementById('turnover-left').innerText = `৳${data.turnover || 0}`;
-          document.getElementById('total-deposit').innerText = `৳${data.totalDeposit || 0}`;
-          document.getElementById('total-withdraw').innerText = `৳${data.totalWithdraw || 0}`;
-          document.getElementById('welcome-user').innerText = `Welcome back, ${data.name || 'User'} 👋`;
-
-          // যদি রোল এডমিন হয়, তবেই মুকুট শো করবে
-          if (data.role === 'admin' || data.role === 'sub-admin') {
-            document.getElementById('admin-crown').style.display = 'block';
-          }
+<script>
+    function togglePassword(id, el) {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            el.innerText = '🙈';
+        } else {
+            input.type = 'password';
+            el.innerText = '👁️';
         }
-      } else {
-        window.location.href = "login.html";
-      }
-    });
-  </script>
+    }
+
+    function handleLogin() {
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-password').value;
+
+        if (!email || !pass) {
+            alert("দয়া করে ইমেইল এবং পাসওয়ার্ড দিন!");
+            return;
+        }
+
+        // সফল লগইনের পর ড্যাশবোর্ডে রিডাইরেক্ট হবে
+        window.location.href = "dashboard.html";
+    }
+</script>
+
 </body>
-    </html>
-    
+</html>
