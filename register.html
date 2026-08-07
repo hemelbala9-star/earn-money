@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Money - Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase App (Compat) SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 </head>
 <body class="bg-[#121212] text-white flex justify-center items-center min-h-screen">
     <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-6 rounded-2xl w-full max-w-sm shadow-xl">
@@ -30,12 +34,54 @@
                 <label class="block text-xs text-gray-400 mb-1">Referral Code (Optional)</label>
                 <input type="text" id="referralCode" class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
             </div>
-            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2.5 rounded-lg shadow-lg hover:opacity-90 transition">Register</button>
+            <button type="submit" id="regBtn" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2.5 rounded-lg shadow-lg hover:opacity-90 transition">Register</button>
         </form>
 
         <p class="text-center text-xs text-gray-400 mt-4">
             Already have an account? <a href="login.html" class="text-[#d4af37] font-semibold">Login</a>
         </p>
     </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
+            authDomain: "earn-money-54b9d.firebaseapp.com",
+            projectId: "earn-money-54b9d",
+            storageBucket: "earn-money-54b9d.firebasestorage.app",
+            messagingSenderId: "1048733611672",
+            appId: "1:1048733611672:web:3766b73fc5c784f3c682ed",
+            measurementId: "G-QCLK8SKGSD"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('regBtn');
+
+            btn.innerText = "Processing...";
+            try {
+                // Dummy email format if phone is used
+                const userEmail = email.includes('@') ? email : `${email}@earnmoney.com`;
+                
+                const res = await firebase.auth().createUserWithEmailAndPassword(userEmail, password);
+                await db.collection('users').doc(res.user.uid).set({
+                    name: name,
+                    email: email,
+                    balance: 0,
+                    createdAt: new Date()
+                });
+                alert("Registration Successful!");
+                window.location.href = "dashboard.html";
+            } catch (error) {
+                alert(error.message);
+                btn.innerText = "Register";
+            }
+        });
+    </script>
 </body>
-</html>
+    </html>
+    
