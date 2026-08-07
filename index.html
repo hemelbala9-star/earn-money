@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Money - Login</title>
+    <title>লগইন - ইনভেস্টমেন্ট প্ল্যাটফর্ম</title>
     <style>
         * {
             margin: 0;
@@ -19,13 +19,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px 0;
+            padding: 20px;
         }
 
         .container {
             width: 100%;
             max-width: 400px;
-            padding: 20px;
         }
 
         .brand-header {
@@ -34,44 +33,43 @@
         }
 
         .logo-icon {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, #ff1a1a 0%, #990000 100%);
-            border-radius: 18px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e60000 0%, #990000 100%);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
             color: #fff;
-            margin: 0 auto 8px;
-            box-shadow: 0 0 20px rgba(255, 26, 26, 0.3);
+            margin: 0 auto 10px;
+            box-shadow: 0 0 15px rgba(230, 0, 0, 0.4);
         }
 
         .brand-header h1 {
             color: #ff2a2a;
             font-size: 22px;
-            margin: 0;
         }
 
         .brand-header p {
             color: #888888;
             font-size: 12px;
-            margin-top: 4px;
+            margin-top: 3px;
         }
 
         .card {
             background: linear-gradient(180deg, #140404 0%, #0d0d0d 100%);
             border: 1px solid #3d0a0a;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
         }
 
         .tab-container {
             display: flex;
             background: #080808;
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 4px;
             margin-bottom: 20px;
             border: 1px solid #2b0808;
@@ -89,37 +87,35 @@
             cursor: pointer;
             font-size: 14px;
             text-decoration: none;
-            display: inline-block;
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, #e60000 0%, #990000 100%);
             color: #fff;
-            box-shadow: 0 2px 10px rgba(230, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(230, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
         }
 
         label {
             font-size: 12px;
             color: #aaaaaa;
             display: block;
-            margin-top: 12px;
-        }
-
-        .input-box {
-            position: relative;
-            margin-top: 4px;
+            margin-bottom: 5px;
         }
 
         input {
             width: 100%;
-            padding: 11px 15px;
+            padding: 12px 15px;
             background: #080808;
             border: 1px solid #330000;
             color: white;
             border-radius: 10px;
-            box-sizing: border-box;
             font-size: 14px;
             outline: none;
+            transition: 0.3s;
         }
 
         input:focus {
@@ -127,28 +123,18 @@
             box-shadow: 0 0 5px rgba(255, 26, 26, 0.4);
         }
 
-        .eye-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #888888;
-            font-size: 14px;
-        }
-
         .submit-btn {
             width: 100%;
-            padding: 14px;
-            margin-top: 20px;
+            padding: 13px;
+            margin-top: 10px;
             background: linear-gradient(135deg, #e60000 0%, #990000 100%);
             color: #fff;
             font-weight: bold;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(230, 0, 0, 0.3);
+            font-size: 15px;
+            box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
             transition: 0.3s;
         }
 
@@ -163,7 +149,7 @@
     <div class="brand-header">
         <div class="logo-icon">৳</div>
         <h1>Earn Money</h1>
-        <p>স্মার্ট বিনিয়োগ প্ল্যাটফর্ম</p>
+        <p>স্মার্ট ইনভেস্টমেন্ট প্ল্যাটফর্ম</p>
     </div>
 
     <div class="card">
@@ -172,46 +158,21 @@
             <a href="register.html" class="tab-btn">📝 রেজিস্ট্রেশন</a>
         </div>
 
-        <div>
-            <label>ইমেইল</label>
-            <input type="email" id="login-email" placeholder="myss@gmail.com">
-
-            <label>পাসওয়ার্ড</label>
-            <div class="input-box">
-                <input type="password" id="login-password" placeholder="পাসওয়ার্ড দিন">
-                <span class="eye-icon" onclick="togglePassword('login-password', this)">👁️</span>
+        <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+            <div class="input-group">
+                <label>ইমেইল অথবা ফোন নম্বর</label>
+                <input type="text" placeholder="আপনার ইমেইল বা ফোন দিন" required>
             </div>
 
-            <button class="submit-btn" onclick="handleLogin()">লগইন →</button>
-        </div>
+            <div class="input-group">
+                <label>পাসওয়ার্ড</label>
+                <input type="password" placeholder="পাসওয়ার্ড দিন" required>
+            </div>
+
+            <button type="submit" class="submit-btn">লগইন করুন →</button>
+        </form>
     </div>
 </div>
-
-<script>
-    function togglePassword(id, el) {
-        const input = document.getElementById(id);
-        if (input.type === 'password') {
-            input.type = 'text';
-            el.innerText = '🙈';
-        } else {
-            input.type = 'password';
-            el.innerText = '👁️';
-        }
-    }
-
-    function handleLogin() {
-        const email = document.getElementById('login-email').value;
-        const pass = document.getElementById('login-password').value;
-
-        if (!email || !pass) {
-            alert("দয়া করে ইমেইল এবং পাসওয়ার্ড দিন!");
-            return;
-        }
-
-        // সফল লগইনের পর ড্যাশবোর্ডে রিডাইরেক্ট হবে
-        window.location.href = "dashboard.html";
-    }
-</script>
 
 </body>
 </html>
