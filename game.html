@@ -1,215 +1,70 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Win Go - Earn Money</title>
-  <style>
-    body { background-color: #0b0e14; color: #fff; font-family: Arial, sans-serif; margin: 0; padding-bottom: 80px; }
-    .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #12161f; border-bottom: 1px solid #222; }
-    .back-btn { background: #1f242d; border: 1px solid #333; color: #ffb703; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; text-decoration: none; }
-    
-    .container { padding: 15px; max-width: 450px; margin: auto; }
-    
-    /* Top Game Bar */
-    .game-top-bar { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-    .wingo-title { color: #2ea043; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 6px; }
-    .timer-box { text-align: right; }
-    .time-left { font-size: 24px; font-weight: bold; color: #ffb703; }
-
-    /* Period & Timer Section */
-    .period-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .period-info span { font-size: 12px; color: #8b949e; display: block; }
-    .period-info b { font-size: 15px; color: #ffb703; }
-
-    /* Number / Bet Board */
-    .board-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
-    .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
-    .num-btn { background: #21262d; border: 1px solid #30363d; color: white; padding: 15px 0; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; }
-    .num-btn.green { background: #2ea043; }
-    .num-btn.red { background: #da3633; }
-    .num-btn.violet { background: #8957e5; }
-
-    /* Bet Input Area */
-    .bet-input-box { margin-top: 15px; }
-    input { width: 100%; padding: 12px; background: #0b0e14; border: 1px solid #30363d; color: white; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 16px; margin-top: 5px; }
-    
-    .action-btns { display: flex; gap: 10px; margin-top: 12px; }
-    .btn-green { flex: 1; background: #2ea043; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-    .btn-violet { flex: 1; background: #8957e5; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-    .btn-red { flex: 1; background: #da3633; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-
-    /* Bottom Nav */
-    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; z-index: 1000; }
-    .bottom-nav a { color: #888; text-decoration: none; text-align: center; font-size: 11px; }
-    .bottom-nav a.active { color: #ffb703; }
-    .bottom-nav div { font-size: 18px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Money - Wingo Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#121212] text-white min-h-screen pb-16">
+    <!-- Top Header -->
+    <header class="bg-[#1e1e1e] border-b border-[#d4af37]/20 p-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <a href="dashboard.html" class="text-[#d4af37] text-lg font-bold">←</a>
+            <h1 class="text-lg font-bold text-[#d4af37]">Wingo Game</h1>
+        </div>
+        <span class="bg-[#2a2a2a] px-3 py-1 rounded-full text-xs border border-[#d4af37]/30">৳0.00</span>
+    </header>
 
-  <div class="header">
-    <a href="dashboard.html" class="back-btn">← Back to Home</a>
-    <div style="font-weight: bold; color: #ffb703;">Earn Money</div>
-    <div>🇧🇩</div>
-  </div>
+    <!-- Main Content -->
+    <main class="p-4 space-y-4 max-w-md mx-auto">
+        <!-- Timer & Period Card -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-5 rounded-2xl shadow-xl flex justify-between items-center">
+            <div>
+                <p class="text-xs text-gray-400">Period No</p>
+                <h3 class="text-sm font-bold text-[#d4af37]" id="periodNo">2026080701</h3>
+            </div>
+            <div class="text-right">
+                <p class="text-xs text-gray-400">Time Remaining</p>
+                <h3 class="text-lg font-extrabold text-red-500" id="timer">00:30</h3>
+            </div>
+        </div>
 
-  <div class="container">
-    
-    <!-- Win Go Top Bar -->
-    <div class="game-top-bar">
-      <div class="wingo-title">
-        <span style="background:#2ea043; width:12px; height:12px; border-radius:50%; display:inline-block;"></span> 
-        WIN GO <span style="font-size: 12px; background:#21262d; padding:2px 6px; border-radius:4px; color:#ffb703;">1 MIN</span>
-      </div>
-      <div>
-        <small style="color:#8b949e; font-size:10px; display:block;">BALANCE</small>
-        <b id="user-balance" style="color:#ffb703; font-size:15px;">৳0.00</b>
-      </div>
-    </div>
+        <!-- Betting Board -->
+        <div class="bg-[#1e1e1e] border border-gray-800 p-5 rounded-2xl shadow-xl space-y-4">
+            <div class="grid grid-cols-3 gap-3">
+                <button class="bg-green-600 text-white py-3 rounded-xl font-bold text-sm shadow-lg">Green</button>
+                <button class="bg-purple-600 text-white py-3 rounded-xl font-bold text-sm shadow-lg">Violet</button>
+                <button class="bg-red-600 text-white py-3 rounded-xl font-bold text-sm shadow-lg">Red</button>
+            </div>
 
-    <!-- Period & Timer -->
-    <div class="period-card">
-      <div class="period-info">
-        <span>PERIOD</span>
-        <b id="period-id">20260803164000</b>
-      </div>
-      <div class="timer-box">
-        <span style="font-size: 10px; color: #8b949e;">TIME LEFT</span>
-        <div class="time-left" id="countdown">60</div>
-      </div>
-    </div>
+            <div class="grid grid-cols-5 gap-2">
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">0</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">1</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">2</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">3</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">4</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">5</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">6</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">7</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">8</button>
+                <button class="bg-[#2a2a2a] border border-gray-700 py-2.5 rounded-lg font-bold text-sm">9</button>
+            </div>
 
-    <!-- Turnover Notice -->
-    <div style="background: #1e1e2e; border: 1px solid #ffb703; border-radius: 10px; padding: 10px; margin-bottom: 15px; font-size: 12px; text-align: center;">
-      টার্নওভার বাকি: <b id="turnover-left" style="color:#f85149;">৳0</b> (বেট ধরলে কমবে)
-    </div>
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Bet Amount</label>
+                <input type="number" id="betAmount" placeholder="Enter amount" class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
+            </div>
 
-    <!-- Betting Board -->
-    <div class="board-card">
-      <div style="font-size: 13px; color: #8b949e; margin-bottom: 5px;">বেট পরিমাণ (Amount) লিখুন:</div>
-      <input type="number" id="bet-amount" placeholder="যেমন: ১০০">
+            <button class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2.5 rounded-lg shadow-lg hover:opacity-90 transition">Place Bet</button>
+        </div>
+    </main>
 
-      <div style="font-size: 13px; color: #8b949e; margin-top: 15px;">রং বা নাম্বার সিলেক্ট করুন:</div>
-      <div class="action-btns">
-        <button class="btn-green" onclick="placeBet('Green')">GREEN</button>
-        <button class="btn-violet" onclick="placeBet('Violet')">VIOLET</button>
-        <button class="btn-red" onclick="placeBet('Red')">RED</button>
-      </div>
-
-      <div class="numbers-grid">
-        <button class="num-btn green" onclick="placeBet('0')">0</button>
-        <button class="num-btn red" onclick="placeBet('1')">1</button>
-        <button class="num-btn green" onclick="placeBet('2')">2</button>
-        <button class="num-btn red" onclick="placeBet('3')">3</button>
-        <button class="num-btn green" onclick="placeBet('4')">4</button>
-        <button class="num-btn red" onclick="placeBet('5')">5</button>
-        <button class="num-btn green" onclick="placeBet('6')">6</button>
-        <button class="num-btn red" onclick="placeBet('7')">7</button>
-        <button class="num-btn green" onclick="placeBet('8')">8</button>
-        <button class="num-btn red" onclick="placeBet('9')">9</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <a href="dashboard.html"><div>🏠</div>হোম</a>
-    <a href="plan.html"><div>📈</div>পরিকল্পনা</a>
-    <a href="deposit.html"><div>💳</div>জমা</a>
-    <a href="game.html" class="active"><div>🎮</div>GAME</a>
-    <a href="withdraw.html"><div>🏧</div>উত্তোলন</a>
-    <a href="profile.html"><div>👤</div>প্রোফাইল</a>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-      authDomain: "earn-money-54b9d.firebaseapp.com",
-      projectId: "earn-money-54b9d",
-      storageBucket: "earn-money-54b9d.firebasestorage.app",
-      messagingSenderId: "1048733611672",
-      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    let userData = null;
-    let userId = null;
-
-    // ১ মিনিটের কাউন্টডাউন টাইমার
-    let timeLeft = 60;
-    setInterval(() => {
-      timeLeft--;
-      if (timeLeft < 0) timeLeft = 60;
-      document.getElementById('countdown').innerText = timeLeft < 10 ? '0' + timeLeft : timeLeft;
-    }, 1000);
-
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        userId = user.uid;
-        const snap = await getDoc(doc(db, "users", userId));
-        if (snap.exists()) {
-          userData = snap.data();
-          let totalBal = (userData.depositWallet || 0) + (userData.incomeWallet || 0);
-          document.getElementById('user-balance').innerText = `৳${totalBal.toFixed(2)}`;
-          document.getElementById('turnover-left').innerText = `৳${userData.turnover || 0}`;
-        }
-      }
-    });
-
-    window.placeBet = async (selection) => {
-      if (!userData) return alert("লগইন করা নেই!");
-
-      const amount = Number(document.getElementById('bet-amount').value);
-      if (!amount || amount <= 0) {
-        alert("সঠিক বেটের পরিমাণ লিখুন!");
-        return;
-      }
-
-      let availableBalance = (userData.depositWallet || 0) + (userData.incomeWallet || 0);
-      if (availableBalance < amount) {
-        alert("পর্যাপ্ত ব্যালেন্স নেই! (গেম খেলতে শুধু ডিপোজিট ও ইনকাম ওয়ালেট ব্যবহার করা যাবে)");
-        return;
-      }
-
-      // ডিপোজিট ওয়ালেট থেকে কেটে বাকিটা ইনকাম ওয়ালেট থেকে কাটার লজিক
-      let newDepositWallet = userData.depositWallet || 0;
-      let newIncomeWallet = userData.incomeWallet || 0;
-
-      if (newDepositWallet >= amount) {
-        newDepositWallet -= amount;
-      } else {
-        let remainder = amount - newDepositWallet;
-        newDepositWallet = 0;
-        newIncomeWallet -= remainder;
-      }
-
-      // টার্নওভার কমানোর লজিক (যত টাকা বেট ধরবে, টার্নওভার তত কমবে)
-      let currentTurnover = userData.turnover || 0;
-      let newTurnover = Math.max(0, currentTurnover - amount);
-
-      try {
-        await updateDoc(doc(db, "users", userId), {
-          depositWallet: newDepositWallet,
-          incomeWallet: newIncomeWallet,
-          turnover: newTurnover
-        });
-
-        alert(`সফলভাবে বেট ধরা হয়েছে (${selection})! আপনার টার্নওভার ৳${amount} কমে গেছে।`);
-        window.location.reload();
-      } catch (error) {
-        alert("ত্রুটি: " + error.message);
-      }
-    }
-  </script>
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#1e1e1e] border-t border-[#d4af37]/20 flex justify-around py-3">
+        <a href="dashboard.html" class="text-gray-400 text-xs text-center">🏠<br>Home</a>
+        <a href="game.html" class="text-[#d4af37] text-xs text-center">🎮<br>Games</a>
+        <a href="profile.html" class="text-gray-400 text-xs text-center">👤<br>Profile</a>
+    </nav>
 </body>
-  </html>
-  
+</html>
