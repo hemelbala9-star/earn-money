@@ -1,180 +1,91 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master Admin Panel - Earn Money</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 15px; }
-    .container { max-width: 800px; margin: auto; }
-    h2, h3, h4 { color: #ffb703; }
-    .card { background: #1e1e2e; border: 1px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-    input, select { width: 95%; padding: 10px; margin: 8px 0; background: #0d1117; border: 1px solid #444; color: #fff; border-radius: 5px; }
-    button { width: 100%; padding: 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: white; margin-top: 5px; }
-    .btn-green { background: #28a745; }
-    .btn-blue { background: #007bff; }
-    .btn-danger { background: #dc3545; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #444; padding: 8px; text-align: left; font-size: 13px; }
-    th { background-color: #2a2a3d; color: #ffb703; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Money - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#121212] text-white min-h-screen pb-16">
+    <!-- Top Header -->
+    <header class="bg-[#1e1e1e] border-b border-[#d4af37]/20 p-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <span class="text-[#d4af37] text-xl font-bold">👑</span>
+            <h1 class="text-lg font-bold text-[#d4af37]">Admin Dashboard</h1>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="bg-[#2a2a2a] px-2.5 py-1 rounded-full text-xs border border-[#d4af37]/30">🇧🇩</span>
+            <a href="profile.html" class="bg-[#2a2a2a] p-1.5 rounded-full border border-[#d4af37]/30 text-xs">🚪</a>
+        </div>
+    </header>
 
-  <div class="container">
-    <h2 style="text-align: center;">🛡️ মাস্টার এডমিন প্যানেল</h2>
+    <!-- Main Admin Sections -->
+    <main class="p-4 space-y-3 max-w-md mx-auto">
+        <!-- All Bets Wingo -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-4 rounded-2xl shadow-lg flex justify-between items-center cursor-pointer">
+            <div class="flex items-center gap-3">
+                <span class="text-xl">📡</span>
+                <h3 class="text-sm font-bold text-white">All Bets Wingo</h3>
+            </div>
+            <span class="text-gray-400">▼</span>
+        </div>
 
-    <!-- ১. বিগ/স্মল গেম কন্ট্রোল সেকশন -->
-    <div class="card">
-      <h3>🎲 বিগ/স্মল গেম কন্ট্রোল</h3>
-      
-      <label style="display:block; margin-bottom:10px; cursor:pointer;">
-        <input type="checkbox" id="auto-loss-toggle" style="width:auto;"> <b style="color:#ff4757;">Auto Loss Mode (মেম্বার সবসময় হারবে)</b>
-      </label>
+        <!-- Pending Deposits -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-4 rounded-2xl shadow-lg flex justify-between items-center cursor-pointer">
+            <div class="flex items-center gap-3">
+                <span class="text-xl">💳</span>
+                <h3 class="text-sm font-bold text-white">Pending Deposits</h3>
+            </div>
+            <span class="text-gray-400">▼</span>
+        </div>
 
-      <label>মেম্বার জেতার চান্স (%):</label>
-      <input type="number" id="win-rate-input" value="30" placeholder="যেমন: 30">
-      <button class="btn-green" id="save-game-settings">গেম সেটিং সেভ করুন</button>
+        <!-- Pending Withdrawals -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-4 rounded-2xl shadow-lg flex justify-between items-center cursor-pointer">
+            <div class="flex items-center gap-3">
+                <span class="text-xl">💸</span>
+                <h3 class="text-sm font-bold text-white">Pending Withdrawals</h3>
+            </div>
+            <span class="text-gray-400">▼</span>
+        </div>
 
-      <hr style="border-color:#444; margin:15px 0;">
+        <!-- User Management -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-4 rounded-2xl shadow-lg flex justify-between items-center cursor-pointer">
+            <div class="flex items-center gap-3">
+                <span class="text-xl">👥</span>
+                <h3 class="text-sm font-bold text-white">User Management</h3>
+            </div>
+            <span class="text-gray-400">▼</span>
+        </div>
 
-      <h4 style="color:#ff4757; margin-bottom:5px;">⚠️ ডাবল বেট সতর্কতা (Suspicious Users)</h4>
-      <p style="font-size:12px; color:#aaa;">একই রাউন্ডে যারা BIG এবং SMALL উভয়ে বেট ধরেছে:</p>
-      <ul id="double-bet-list" style="color:#eccc68; padding-left:20px; font-size:14px;">
-        <li>চেক করা হচ্ছে...</li>
-      </ul>
-    </div>
+        <!-- Referral Checker Settings -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-4 rounded-2xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">🔗</span>
+                    <h3 class="text-sm font-bold text-white">Referral Settings & Checker</h3>
+                </div>
+                <span class="text-gray-400">▼</span>
+            </div>
+            <div class="bg-[#2a2a2a] p-3 rounded-xl border border-gray-700 space-y-2">
+                <label class="block text-xs text-gray-400">Referral Bonus Amount (BDT)</label>
+                <div class="flex gap-2">
+                    <input type="number" value="50" class="w-full bg-[#121212] border border-gray-600 rounded-lg px-3 py-1.5 text-sm text-[#d4af37] font-bold">
+                    <button class="bg-amber-500 text-black px-4 py-1.5 rounded-lg text-xs font-semibold">Save</button>
+                </div>
+            </div>
+        </div>
 
-    <!-- ২. প্লান/প্যাকেজ ম্যানেজার -->
-    <div class="card">
-      <h3>📦 প্লান ম্যানেজার (Plan Manager)</h3>
-      <input type="text" id="plan-name" placeholder="প্লানের নাম (যেমন: VIP 1)">
-      <input type="number" id="plan-price" placeholder="প্যাকেজের দাম (টাকা)">
-      <input type="number" id="daily-income" placeholder="প্রতিদিনের আয় (টাকা)">
-      <input type="number" id="plan-days" placeholder="মেয়াদ (কত দিন)">
-      <button class="btn-blue" id="save-plan-btn">নতুন প্লান যোগ করুন</button>
-    </div>
-
-    <!-- ৩. ইউজার ম্যানেজমেন্ট -->
-    <div class="card">
-      <h3>👥 ইউজার ম্যানেজমেন্ট</h3>
-      <button class="btn-blue" onclick="loadAllUsers()">সকল ইউজারের তালিকা রিফ্রেশ করুন</button>
-      <table>
-        <thead>
-          <tr>
-            <th>ইমেইল</th>
-            <th>ব্যালেন্স</th>
-            <th>রোল</th>
-          </tr>
-        </thead>
-        <tbody id="user-table-body">
-          <tr><td colspan="3">ডাটা লোড হচ্ছে...</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ৪. পেন্ডিং ডিপোজিট ও উইথড্র রিকোয়েস্ট -->
-    <div class="card">
-      <h3>💳 ডিপোজিট ও উইথড্র কন্ট্রোল</h3>
-      <p style="color:#aaa; font-size:13px;">ইউজারদের পাঠোনো ডিপোজিট ও উইথড্র আবেদনসমূহ এখানে জমা হবে:</p>
-      <div id="requests-box">
-        <p>কোনো পেন্ডিং রিকোয়েস্ট নেই।</p>
-      </div>
-    </div>
-
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, collection, getDocs, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-      authDomain: "earn-money-54b9d.firebaseapp.com",
-      projectId: "earn-money-54b9d",
-      storageBucket: "earn-money-54b9d.firebasestorage.app",
-      messagingSenderId: "1048733611672",
-      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // ১. গেম সেটিং সেভ করা
-    document.getElementById('save-game-settings').addEventListener('click', async () => {
-      const isAutoLoss = document.getElementById('auto-loss-toggle').checked;
-      const winRate = Number(document.getElementById('win-rate-input').value);
-
-      await setDoc(doc(db, "game_settings", "big_small"), {
-        autoLoss: isAutoLoss,
-        winRate: winRate
-      }, { merge: true });
-
-      alert("গেম কন্ট্রোল সেটিং সফলভাবে সেভ হয়েছে!");
-    });
-
-    // ২. ডাবল বেট রিয়েল-টাইম ডিটেকশন
-    onSnapshot(doc(db, "game_settings", "live_bets"), (docSnap) => {
-      const listEl = document.getElementById('double-bet-list');
-      listEl.innerHTML = "";
-      
-      if (docSnap.exists()) {
-        const bets = docSnap.data();
-        let found = false;
-
-        for (let userId in bets) {
-          const userBet = bets[userId];
-          if (userBet.hasBig && userBet.hasSmall) {
-            found = true;
-            listEl.innerHTML += `<li>🚨 <b>${userBet.email}</b> একই রাউন্ডে BIG এবং SMALL দুটোতেই বেট ধরেছে!</li>`;
-          }
-        }
-        if (!found) listEl.innerHTML = "<li>কোনো সন্দেহজনক ডাবল বেট নেই।</li>";
-      } else {
-        listEl.innerHTML = "<li>কোনো একটিভ বেট নেই।</li>";
-      }
-    });
-
-    // ৩. প্লান সেভ করা
-    document.getElementById('save-plan-btn').addEventListener('click', async () => {
-      const name = document.getElementById('plan-name').value;
-      const price = Number(document.getElementById('plan-price').value);
-      const daily = Number(document.getElementById('daily-income').value);
-      const days = Number(document.getElementById('plan-days').value);
-
-      if(name && price && daily && days) {
-        await addDoc(collection(db, "plans"), {
-          planName: name,
-          price: price,
-          dailyIncome: daily,
-          durationDays: days,
-          totalReturn: daily * days
-        });
-        alert("নতুন প্যাকেজ যুক্ত হয়েছে!");
-      } else {
-        alert("সবগুলো ঘর ঠিকমত পূরণ করুন!");
-      }
-    });
-
-    // ৪. সকল ইউজার লোড করা
-    window.loadAllUsers = async function() {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      const tableBody = document.getElementById("user-table-body");
-      tableBody.innerHTML = "";
-
-      querySnapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        tableBody.innerHTML += `
-          <tr>
-            <td>${data.email || 'N/A'}</td>
-            <td>৳${data.balance || 0}</td>
-            <td>${data.role || 'user'}</td>
-          </tr>
-        `;
-      });
-    };
-
-    loadAllUsers();
-  </script>
+        <!-- Management Admin (Sub-Admin Permissions) -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-4 rounded-2xl shadow-lg space-y-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">🛠️</span>
+                    <h3 class="text-sm font-bold text-[#d4af37]">Management Admin</h3>
+                </div>
+                <span class="text-gray-400">▼</span>
+            </div>
+            <p class="text-[11px] text-gray-400">Owner ছাড়া অন্য কেউ এই সেকশন দেখতে পাবে না।</p>
+        </div>
+    </main>
 </body>
 </html>
