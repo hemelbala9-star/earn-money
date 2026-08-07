@@ -32,7 +32,6 @@
             font-size: 20px;
             font-weight: bold;
             color: #ff2a2a;
-            letter-spacing: 0.5px;
         }
 
         .header-icons {
@@ -44,7 +43,7 @@
         .admin-crown {
             font-size: 20px;
             cursor: pointer;
-            display: none; /* ডিফল্টভাবে লুকিয়ে থাকবে, অ্যাডমিন হলে শো করবে */
+            display: none; /* অ্যাডমিন হলে শো করবে */
         }
 
         .bell-icon {
@@ -75,7 +74,6 @@
             color: #999999;
             margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .wallet-card h2 {
@@ -104,11 +102,6 @@
             text-align: center;
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-
-        .action-btn:hover {
-            opacity: 0.9;
         }
 
         .action-btn.secondary {
@@ -194,5 +187,139 @@
             font-weight: bold;
             font-size: 13px;
             cursor: pointer;
-            box-shadow: 0 3px 10px rgba(230, 0, 0, 0.2
-        
+            box-shadow: 0 3px 10px rgba(230, 0, 0, 0.25);
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0c0202;
+            border-top: 1px solid #260505;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #737373;
+            text-decoration: none;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: #ff2a2a;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand-title">Earn Money</div>
+        <div class="header-icons">
+            <span class="bell-icon">🔔</span>
+            <span class="admin-crown" id="adminCrown" onclick="goToAdmin()">👑</span>
+        </div>
+    </div>
+
+    <div class="wallets-container">
+        <div class="wallet-card">
+            <h3>ডিপোজিট ওয়ালেট</h3>
+            <h2>৳ 0.00</h2>
+        </div>
+        <div class="wallet-card">
+            <h3>ইনকাম ওয়ালেট</h3>
+            <h2>৳ 0.00</h2>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="deposit.html" class="action-btn">ডিপোজিট করুন</a>
+        <a href="withdraw.html" class="action-btn secondary">উত্তোলন করুন</a>
+    </div>
+
+    <div class="section-title">হিস্ট্রি সারাংশ</div>
+    <div class="history-grid">
+        <div class="history-box">
+            <span>মোট ডিপোজিট</span>
+            <h4>৳ 0.00</h4>
+        </div>
+        <div class="history-box">
+            <span>মোট উত্তোলন</span>
+            <h4>৳ 0.00</h4>
+        </div>
+        <div class="history-box">
+            <span>মোট লাভ / প্রফিট</span>
+            <h4>৳ 0.00</h4>
+        </div>
+        <div class="history-box">
+            <span>মোট রেফার বোনাস</span>
+            <h4>৳ 0.00</h4>
+        </div>
+    </div>
+
+    <div class="section-title" id="plansSection">বিনিয়োগ প্ল্যানসমূহ</div>
+    <div class="plans-container">
+        <div class="plan-card">
+            <div class="plan-info">
+                <h4>স্টার্টার প্ল্যান</h4>
+                <p>মূল্য: ৳১৯৯ | দৈনিক আয়: ৳৩০</p>
+            </div>
+            <button class="invest-btn" onclick="buyPlan(199, 'স্টার্টার প্ল্যান')">কিনুন</button>
+        </div>
+
+        <div class="plan-card">
+            <div class="plan-info">
+                <h4>ব্রোঞ্জ প্ল্যান</h4>
+                <p>মূল্য: ৳২৯৯ | দৈনিক আয়: ৳৫০</p>
+            </div>
+            <button class="invest-btn" onclick="buyPlan(299, 'ব্রোঞ্জ প্ল্যান')">কিনুন</button>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span>🏠</span>হোম
+        </a>
+        <a href="#plansSection" class="nav-item">
+            <span>📊</span>পরিকল্পনা
+        </a>
+        <a href="task.html" class="nav-item">
+            <span>📋</span>টাস্ক
+        </a>
+        <a href="referral.html" class="nav-item">
+            <span>👥</span>রেফারেল
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span>👤</span>প্রোফাইল
+        </a>
+    </div>
+
+    <script>
+        // ইউজার রোল admin হলে মুকুট দেখাবে
+        const userRole = "admin"; 
+        if (userRole === "admin") {
+            document.getElementById("adminCrown").style.display = "inline-block";
+        }
+
+        function goToAdmin() {
+            window.location.href = "admin.html";
+        }
+
+        function buyPlan(price, name) {
+            alert(name + " কেনার রিকোয়েস্ট পাঠানো হয়েছে। মূল্য: ৳" + price);
+        }
+    </script>
+</body>
+</html>
