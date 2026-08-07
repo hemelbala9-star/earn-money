@@ -1,186 +1,49 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Big / Small Game - Earn Money</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { background-color: #0b0e14; color: #ffffff; padding: 15px; padding-bottom: 80px; }
-    .card { background: #161b22; border-radius: 12px; padding: 15px; max-width: 450px; margin: auto; border: 1px solid #30363d; }
-    .timer-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
-    .time-left { font-size: 32px; font-weight: bold; color: #ffb703; }
-    .last-result { margin: 15px 0; text-align: center; font-size: 16px; }
-    .badge { padding: 4px 10px; border-radius: 5px; font-weight: bold; font-size: 14px; margin-left: 5px; }
-    .bg-big { background: #e63946; }
-    .bg-small { background: #457b9d; }
-    .btn-group { display: flex; gap: 10px; margin: 20px 0; }
-    .btn-bet { flex: 1; padding: 12px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; color: white; }
-    .btn-big { background: #e63946; }
-    .btn-small { background: #457b9d; }
-    input { width: 100%; padding: 10px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 6px; text-align: center; font-size: 16px; }
-    
-    /* Bottom Navigation Bar */
-    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 1000; }
-    .bottom-nav a { color: #888; text-decoration: none; text-align: center; font-size: 11px; }
-    .bottom-nav a.active { color: #ffb703; }
-    .bottom-nav div { font-size: 18px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Money - Tasks & Gifts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#121212] text-white min-h-screen pb-16">
+    <!-- Top Header -->
+    <header class="bg-[#1e1e1e] border-b border-[#d4af37]/20 p-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <a href="dashboard.html" class="text-[#d4af37] text-lg font-bold">←</a>
+            <h1 class="text-lg font-bold text-[#d4af37]">Tasks & Daily Gifts</h1>
+        </div>
+    </header>
 
-  <div class="card">
-    <div class="timer-box">
-      <div>
-        <small style="color: #8b949e;">PERIOD</small>
-        <div id="period-id" style="font-weight: bold;">2026080701</div>
-      </div>
-      <div>
-        <small style="color: #8b949e;">TIME LEFT</small>
-        <div class="time-left" id="timer">60</div>
-      </div>
-    </div>
+    <!-- Main Content -->
+    <main class="p-4 space-y-4 max-w-md mx-auto">
+        <!-- Daily Gift Card -->
+        <div class="bg-[#1e1e1e] border border-[#d4af37]/30 p-5 rounded-2xl shadow-xl space-y-3">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-sm font-bold text-[#d4af37]">🎁 Daily Login Gift</h3>
+                    <p class="text-xs text-gray-400">Claim your free reward every day</p>
+                </div>
+                <span class="text-2xl">🎁</span>
+            </div>
+            <button class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-semibold py-2 rounded-lg text-sm shadow-lg hover:opacity-95 transition">Claim Daily Gift</button>
+        </div>
 
-    <div class="last-result">
-      সর্বশেষ ফলাফল: <span id="last-num" class="badge bg-big">-</span> 
-      <span id="last-type" class="badge bg-big">-</span>
-    </div>
+        <!-- Gift Code Redeem Card -->
+        <div class="bg-[#1e1e1e] border border-gray-800 p-5 rounded-2xl shadow-xl space-y-3">
+            <h3 class="text-sm font-bold text-white">🎟️ Redeem Gift Code</h3>
+            <div>
+                <input type="text" id="giftCode" placeholder="Enter gift code" class="w-full bg-[#2a2a2a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af37]">
+            </div>
+            <button class="w-full bg-[#333] border border-[#d4af37]/50 text-[#d4af37] font-semibold py-2 rounded-lg text-sm hover:bg-[#d4af37] hover:text-black transition">Redeem Now</button>
+        </div>
+    </main>
 
-    <input type="number" id="bet-amount" placeholder="বাজির পরিমাণ (টাকা)" value="100">
-    
-    <div class="btn-group">
-      <button class="btn-bet btn-big" onclick="placeBet('BIG')">BIG (5-9)</button>
-      <button class="btn-bet btn-small" onclick="placeBet('SMALL')">SMALL (0-4)</button>
-    </div>
-
-    <p id="user-choice" style="text-align: center; color: #ffb703; font-weight: bold;"></p>
-  </div>
-
-  <!-- বটম নেভিগেশন বার -->
-  <div class="bottom-nav">
-    <a href="dashboard.html"><div>🏠</div>হোম</a>
-    <a href="plan.html"><div>📈</div>পরিকল্পনা</a>
-    <a href="deposit.html"><div>💳</div>জমা</a>
-    <a href="game.html" class="active"><div>🎮</div>GAME</a>
-    <a href="withdraw.html"><div>🏧</div>উত্তোলন</a>
-    <a href="profile.html"><div>👤</div>প্রোফাইল</a>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-      authDomain: "earn-money-54b9d.firebaseapp.com",
-      projectId: "earn-money-54b9d",
-      storageBucket: "earn-money-54b9d.firebasestorage.app",
-      messagingSenderId: "1048733611672",
-      appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    let timeLeft = 60;
-    let userBets = { BIG: false, SMALL: false, amount: 0 };
-
-    // টাইমার কাউন্টডাউন
-    setInterval(() => {
-      timeLeft--;
-      document.getElementById('timer').innerText = timeLeft < 10 ? '0' + timeLeft : timeLeft;
-
-      if (timeLeft === 0) {
-        processGameResult();
-        timeLeft = 60;
-      }
-    }, 1000);
-
-    // বেট ধরার লজিক
-    window.placeBet = async function(type) {
-      if (timeLeft <= 5) return alert("সময় শেষ! পরবর্তী রাউন্ডের জন্য অপেক্ষা করুন।");
-      
-      const user = auth.currentUser;
-      if (!user) return alert("অনুগ্রহ করে প্রথমে লগইন করুন!");
-
-      const amount = Number(document.getElementById('bet-amount').value);
-      if (!amount || amount <= 0) return alert("সঠিক বাজির পরিমাণ লিখুন!");
-
-      if (type === 'BIG') userBets.BIG = true;
-      if (type === 'SMALL') userBets.SMALL = true;
-      userBets.amount = amount;
-
-      // ডাবল বেট ডিটেকশনের ডাটা ফায়ারবেসে সেভ করা (এডমিন অ্যালার্টের জন্য)
-      await setDoc(doc(db, "game_settings", "live_bets"), {
-        [user.uid]: {
-          email: user.email,
-          hasBig: userBets.BIG,
-          hasSmall: userBets.SMALL
-        }
-      }, { merge: true });
-
-      document.getElementById('user-choice').innerText = `আপনার বেট: ${userBets.BIG ? 'BIG ' : ''}${userBets.SMALL ? 'SMALL' : ''} (৳${amount})`;
-    };
-
-    // এডমিন প্যানেল কন্ট্রোল ভিত্তিক রেজাল্ট বের করা
-    async function processGameResult() {
-      const user = auth.currentUser;
-      const settingsSnap = await getDoc(doc(db, "game_settings", "big_small"));
-      
-      let autoLoss = false;
-      let winRate = 30;
-
-      if (settingsSnap.exists()) {
-        autoLoss = settingsSnap.data().autoLoss || false;
-        winRate = settingsSnap.data().winRate || 30;
-      }
-
-      let finalType = "";
-
-      // ১. অটো লস মোড চেক
-      if (autoLoss && (userBets.BIG || userBets.SMALL)) {
-        if (userBets.BIG && !userBets.SMALL) finalType = 'SMALL';
-        else if (userBets.SMALL && !userBets.BIG) finalType = 'BIG';
-        else finalType = Math.random() > 0.5 ? 'BIG' : 'SMALL';
-      } 
-      // ২. উইন পার্সেন্টেজ চেক
-      else {
-        const isUserWin = (Math.random() * 100) < winRate;
-        if (userBets.BIG && !userBets.SMALL) {
-          finalType = isUserWin ? 'BIG' : 'SMALL';
-        } else if (userBets.SMALL && !userBets.BIG) {
-          finalType = isUserWin ? 'SMALL' : 'BIG';
-        } else {
-          finalType = Math.random() > 0.5 ? 'BIG' : 'SMALL';
-        }
-      }
-
-      let finalNumber = finalType === 'BIG' ? Math.floor(Math.random() * 5) + 5 : Math.floor(Math.random() * 5);
-
-      document.getElementById('last-num').innerText = finalNumber;
-      document.getElementById('last-type').innerText = finalType;
-
-      // ব্যালেন্স হিসেব করা
-      if (user && userBets.amount > 0) {
-        const userRef = doc(db, "users", user.uid);
-
-        if ((userBets.BIG && finalType === 'BIG') || (userBets.SMALL && finalType === 'SMALL')) {
-          const winAmount = userBets.amount * 1.9;
-          await updateDoc(userRef, { balance: increment(winAmount) });
-          alert(`🎉 বিজয়ী নম্বর: ${finalNumber} (${finalType})। আপনি ৳${winAmount} জিতেছেন!`);
-        } else {
-          await updateDoc(userRef, { balance: increment(-userBets.amount) });
-          alert(`❌ বিজয়ী নম্বর: ${finalNumber} (${finalType})। আপনি হেরে গেছেন।`);
-        }
-      }
-
-      // রিসেট
-      userBets = { BIG: false, SMALL: false, amount: 0 };
-      document.getElementById('user-choice').innerText = "";
-    }
-  </script>
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#1e1e1e] border-t border-[#d4af37]/20 flex justify-around py-3">
+        <a href="dashboard.html" class="text-gray-400 text-xs text-center">🏠<br>Home</a>
+        <a href="game.html" class="text-gray-400 text-xs text-center">🎮<br>Games</a>
+        <a href="profile.html" class="text-gray-400 text-xs text-center">👤<br>Profile</a>
+    </nav>
 </body>
-    </html>
-      
+</html>
