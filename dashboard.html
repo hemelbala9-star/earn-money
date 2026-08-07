@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ড্যাশবোর্ড - Earn Money</title>
+    <title>ড্যাশবোর্ড - ইনভেস্টমেন্ট প্ল্যাটফর্ম</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
             padding-bottom: 70px;
         }
 
-        /* Header */
+        /* Top Header */
         .header {
             background-color: #1a1a1a;
             padding: 15px 20px;
@@ -28,31 +28,12 @@
             border-bottom: 1px solid #330000;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff1a1a 0%, #990000 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #fff;
-        }
-
         .header h1 {
-            font-size: 18px;
+            font-size: 20px;
             color: #ff1a1a;
         }
 
-        .header-right {
+        .header-icons {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -60,24 +41,30 @@
 
         .admin-crown {
             font-size: 20px;
+            display: none; /* ডিফল্টভাবে লুকিয়ে থাকবে, জাস্টিফাই করে শো করা হবে */
             cursor: pointer;
-            display: none; /* ডিফল্টভাবে লুকিয়ে থাকবে, শুধু অ্যাডমিন হলে দেখাবে */
-            text-decoration: none;
         }
 
-        /* Two Wallets Container */
+        .bell-icon {
+            font-size: 18px;
+            color: #cccccc;
+            cursor: pointer;
+        }
+
+        /* Dual Wallets Container */
         .wallets-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            display: flex;
+            gap: 15px;
             margin: 20px;
         }
 
         .wallet-card {
-            background: #1a1a1a;
+            flex: 1;
+            background: linear-gradient(135deg, #1a1a1a, #261a1a);
             padding: 15px;
             border-radius: 12px;
-            border: 1px solid #330000;
+            border: 1px solid #ff1a1a;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.15);
             text-align: center;
         }
 
@@ -88,13 +75,10 @@
         }
 
         .wallet-card h2 {
-            font-size: 18px;
+            font-size: 20px;
             color: #ffffff;
             font-weight: bold;
         }
-
-        .wallet-card.deposit h2 { color: #ff1a1a; }
-        .wallet-card.income h2 { color: #00ff66; }
 
         /* Action Buttons */
         .action-buttons {
@@ -118,12 +102,18 @@
             transition: 0.3s;
         }
 
-        .action-btn:hover { background-color: #e00000; }
+        .action-btn:hover {
+            background-color: #e00000;
+        }
+
         .action-btn.secondary {
             background-color: #262626;
             border: 1px solid #444444;
         }
-        .action-btn.secondary:hover { background-color: #333333; }
+
+        .action-btn.secondary:hover {
+            background-color: #333333;
+        }
 
         /* Section Title */
         .section-title {
@@ -134,16 +124,12 @@
             padding-left: 8px;
         }
 
-        /* Plans Section (Hidden by default, shown when plan clicked) */
+        /* Investment Plans */
         .plans-container {
-            display: none; /* পরিকল্পনা মেনুতে চাপ দিলে এটি দেখাবে */
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            margin: 0 20px;
-        }
-
-        .plans-container.active {
-            display: grid;
+            margin: 0 20px 20px 20px;
         }
 
         .plan-card {
@@ -156,8 +142,16 @@
             align-items: center;
         }
 
-        .plan-info h4 { font-size: 16px; color: #ffffff; margin-bottom: 5px; }
-        .plan-info p { font-size: 13px; color: #aaaaaa; }
+        .plan-info h4 {
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .plan-info p {
+            font-size: 13px;
+            color: #aaaaaa;
+        }
 
         .invest-btn {
             background-color: #ff1a1a;
@@ -169,7 +163,38 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        .invest-btn:hover { background-color: #e00000; }
+
+        .invest-btn:hover {
+            background-color: #e00000;
+        }
+
+        /* History Summary Section */
+        .history-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 0 20px 20px 20px;
+        }
+
+        .history-box {
+            background-color: #1a1a1a;
+            border: 1px solid #330000;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .history-box span {
+            font-size: 12px;
+            color: #aaaaaa;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .history-box h4 {
+            font-size: 16px;
+            color: #ff1a1a;
+        }
 
         /* Bottom Navigation Bar */
         .bottom-nav {
@@ -189,35 +214,39 @@
             color: #888888;
             text-decoration: none;
             font-size: 12px;
-            cursor: pointer;
             transition: 0.3s;
+            cursor: pointer;
         }
 
-        .nav-item.active, .nav-item:hover { color: #ff1a1a; }
-        .nav-item span { display: block; font-size: 18px; margin-bottom: 2px; }
+        .nav-item.active, .nav-item:hover {
+            color: #ff1a1a;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="header-left">
-            <div class="logo-icon">৳</div>
-            <h1>Earn Money</h1>
-        </div>
-        <div class="header-right">
-            <a href="admin.html" id="admin-crown-btn" class="admin-crown" title="Admin Panel">👑</a>
-            <div class="user-info" id="user-name">লোড হচ্ছে...</div>
+        <h1>Earn Money</h1>
+        <div class="header-icons">
+            <span class="bell-icon">🔔</span>
+            <span class="admin-crown" id="adminCrown" onclick="goToAdmin()" title="অ্যাডমিন প্যানেল">👑</span>
         </div>
     </div>
 
     <div class="wallets-container">
-        <div class="wallet-card deposit">
-            <h3>ডিপোজিট ওয়ালেট</h3>
-            <h2 id="deposit-balance">৳ 0.00</h2>
+        <div class="wallet-card">
+            <h3>ডিপোজিট ওয়ালেট</h3>
+            <h2 id="depositWallet">৳ 0.00</h2>
         </div>
-        <div class="wallet-card income">
-            <h3>ইনকাম ওয়ালেট</h3>
-            <h2 id="income-balance">৳ 0.00</h2>
+        <div class="wallet-card">
+            <h3>ইনকাম ওয়ালেট</h3>
+            <h2 id="incomeWallet">৳ 0.00</h2>
         </div>
     </div>
 
@@ -226,15 +255,34 @@
         <a href="withdraw.html" class="action-btn secondary">উত্তোলন করুন</a>
     </div>
 
-    <div class="section-title" id="content-title">স্বাগতম ড্যাশবোর্ডে</div>
+    <div class="section-title">হিস্ট্রি সারাংশ</div>
+    <div class="history-grid">
+        <div class="history-box">
+            <span>মোট ডিপোজিট</span>
+            <h4 id="totalDeposit">৳ 0.00</h4>
+        </div>
+        <div class="history-box">
+            <span>মোট উত্তোলন</span>
+            <h4 id="totalWithdraw">৳ 0.00</h4>
+        </div>
+        <div class="history-box">
+            <span>মোট লাভ / প্রফিট</span>
+            <h4 id="totalProfit">৳ 0.00</h4>
+        </div>
+        <div class="history-box">
+            <span>মোট রেফার বোনাস</span>
+            <h4 id="totalRefer">৳ 0.00</h4>
+        </div>
+    </div>
 
-    <div class="plans-container" id="plans-section">
+    <div class="section-title" id="plansSection">বিনিয়োগ প্ল্যানসমূহ</div>
+    <div class="plans-container">
         <div class="plan-card">
             <div class="plan-info">
                 <h4>স্টার্টার প্ল্যান</h4>
                 <p>মূল্য: ৳১৯৯ | দৈনিক আয়: ৳৩০</p>
             </div>
-            <button class="invest-btn">কিনুন</button>
+            <button class="invest-btn" onclick="buyPlan(199, 'স্টার্টার প্ল্যান')">কিনুন</button>
         </div>
 
         <div class="plan-card">
@@ -242,7 +290,7 @@
                 <h4>ব্রোঞ্জ প্ল্যান</h4>
                 <p>মূল্য: ৳২৯৯ | দৈনিক আয়: ৳৫০</p>
             </div>
-            <button class="invest-btn">কিনুন</button>
+            <button class="invest-btn" onclick="buyPlan(299, 'ব্রোঞ্জ প্ল্যান')">কিনুন</button>
         </div>
 
         <div class="plan-card">
@@ -250,86 +298,45 @@
                 <h4>গোল্ড প্ল্যান</h4>
                 <p>মূল্য: ৳৮৯৯ | দৈনিক আয়: ৳১৬০</p>
             </div>
-            <button class="invest-btn">কিনুন</button>
+            <button class="invest-btn" onclick="buyPlan(899, 'গোল্ড প্ল্যান')">কিনুন</button>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a onclick="showHome()" class="nav-item active" id="nav-home">
+        <a href="dashboard.html" class="nav-item active">
             <span>🏠</span>হোম
         </a>
-        <a onclick="showPlans()" class="nav-item" id="nav-plan">
-            <span>📈</span>পরিকল্পনা
-        </a>
-        <a href="deposit.html" class="nav-item">
-            <span>💳</span>জমা
+        <a href="dashboard.html#plansSection" class="nav-item">
+            <span>📊</span>পরিকল্পনা
         </a>
         <a href="task.html" class="nav-item">
-            <span>⏰</span>পিসিটি / টাস্ক
+            <span>📋</span>টাস্ক
         </a>
-        <a href="withdraw.html" class="nav-item">
-            <span>💲</span>উত্তোলন
+        <a href="referral.html" class="nav-item">
+            <span>👥</span>রেফারেল
         </a>
         <a href="profile.html" class="nav-item">
             <span>👤</span>প্রোফাইল
         </a>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-            authDomain: "earn-money-54b9d.firebaseapp.com",
-            projectId: "earn-money-54b9d",
-            storageBucket: "earn-money-54b9d.firebasestorage.app",
-            messagingSenderId: "1048733611672",
-            appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (userDoc.exists()) {
-                    const data = userDoc.data();
-                    document.getElementById('user-name').innerText = data.name;
-                    document.getElementById('deposit-balance').innerText = `৳ ${data.depositWallet || 0}`;
-                    document.getElementById('income-balance').innerText = `৳ ${data.incomeWallet || 0}`;
-
-                    // যদি ইউজার অ্যাডমিন হয়, তবেই মাথার উপর মুকুট দেখাবে
-                    if (data.role === 'admin') {
-                        document.getElementById('admin-crown-btn').style.display = 'block';
-                    }
-                }
-            } else {
-                window.location.href = "login.html";
-            }
-        });
-    </script>
-
     <script>
-        // পরিকল্পনা (Plan) এবং হোম টগল করার ফাংশন
-        function showPlans() {
-            document.getElementById('plans-section').classList.add('active');
-            document.getElementById('content-title').innerText = 'বিনিয়োগ প্ল্যানসমূহ';
-            document.getElementById('nav-plan').classList.add('active');
-            document.getElementById('nav-home').classList.remove('active');
+        // ডেমো চেক: যদি ইউজার রোল অ্যাডমিন হয় তবে মুকুট (👑) দেখাবে
+        // প্রজেক্টে ফায়ারবেস বা লোকালস্টোরেজ থেকে রোল চেক করে এটি ডাইনামিক করা যাবে।
+        const userRole = "admin"; // টেস্টের জন্য "admin" দেওয়া হলো, সাধারণ ইউজারের ক্ষেত্রে "user" হবে।
+        
+        if (userRole === "admin") {
+            document.getElementById("adminCrown").style.display = "inline-block";
         }
 
-        function showHome() {
-            document.getElementById('plans-section').classList.remove('active');
-            document.getElementById('content-title').innerText = 'স্বাগতম ড্যাশবোর্ডে';
-            document.getElementById('nav-home').classList.add('active');
-            document.getElementById('nav-plan').classList.remove('active');
+        function goToAdmin() {
+            window.location.href = "admin.html";
+        }
+
+        function buyPlan(price, planName) {
+            alert(planName + " কিনতে সফলভাবে রিকোয়েস্ট পাঠানো হয়েছে। মূল্য: ৳" + price);
         }
     </script>
-
 </body>
     </html>
     
