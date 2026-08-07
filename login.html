@@ -1,109 +1,126 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Earn Money - Login</title>
-  <style>
-    body { background-color: #0b0e14; color: #fff; font-family: Arial, sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px 0; }
-    .container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
-    
-    .brand-header { text-align: center; margin-bottom: 20px; }
-    .logo-icon { width: 65px; height: 65px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: bold; color: #000; margin: 0 auto 8px; box-shadow: 0 0 20px rgba(255, 183, 3, 0.3); }
-    .brand-header h1 { color: #ffb703; font-size: 22px; margin: 0; }
-    .brand-header p { color: #8b949e; font-size: 12px; margin-top: 4px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন - ইনভেস্টমেন্ট প্ল্যাটফর্ম</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .card { background: #161b22; border: 1px solid #30363d; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    
-    .tab-container { display: flex; background: #0b0e14; border-radius: 12px; padding: 4px; margin-bottom: 20px; border: 1px solid #30363d; }
-    .tab-btn { flex: 1; padding: 10px; text-align: center; background: transparent; border: none; color: #8b949e; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block; }
-    .tab-btn.active { background: #ffb703; color: #000; }
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    label { font-size: 12px; color: #8b949e; display: block; margin-top: 12px; }
-    .input-box { position: relative; margin-top: 4px; }
-    input { width: 100%; padding: 11px 15px; background: #0b0e14; border: 1px solid #30363d; color: white; border-radius: 10px; box-sizing: border-box; font-size: 14px; outline: none; }
-    input:focus { border-color: #ffb703; }
-    
-    .eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8b949e; font-size: 14px; }
-    .submit-btn { width: 100%; padding: 14px; margin-top: 20px; background: linear-gradient(135deg, #ffc107 0%, #e2a014 100%); color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; transition: 0.3s; }
-    .submit-btn:hover { opacity: 0.9; }
-  </style>
+        .login-container {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #330000;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ff1a1a;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: #262626;
+            border: 1px solid #444444;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff1a1a;
+            box-shadow: 0 0 5px rgba(255, 26, 26, 0.5);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff1a1a;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #e00000;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+
+        .register-link a {
+            color: #ff1a1a;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="brand-header">
-    <div class="logo-icon">৳</div>
-    <h1>Earn Money</h1>
-    <p>স্মার্ট বিনিয়োগ প্ল্যাটফর্ম</p>
-  </div>
+    <div class="login-container">
+        <h2>লগইন করুন</h2>
+        <form action="dashboard.html" method="POST">
+            <div class="input-group">
+                <label for="phone">ফোন নম্বর</label>
+                <input type="text" id="phone" name="phone" placeholder="আপনার ফোন নম্বর দিন" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="password">পাসওয়ার্ড</label>
+                <input type="password" id="password" name="password" placeholder="আপনার পাসওয়ার্ড দিন" required>
+            </div>
 
-  <div class="card">
-    <div class="tab-container">
-      <a href="login.html" class="tab-btn active">🔑 লগইন</a>
-      <a href="register.html" class="tab-btn">📝 রেজিস্ট্রেশন</a>
+            <button type="submit" class="login-btn">লগইন</button>
+        </form>
+
+        <div class="register-link">
+            একাউন্ট নেই? <a href="register.html">রেজিস্ট্রেশন করুন</a>
+        </div>
     </div>
-
-    <div>
-      <label>ইমেইল</label>
-      <input type="email" id="login-email" placeholder="myss@gmail.com">
-
-      <label>পাসওয়ার্ড</label>
-      <div class="input-box">
-        <input type="password" id="login-password" placeholder="পাসওয়ার্ড দিন">
-        <span class="eye-icon" onclick="togglePassword('login-password', this)">👁️</span>
-      </div>
-
-      <button class="submit-btn" onclick="handleLogin()">লগইন →</button>
-    </div>
-  </div>
-</div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAkbZY2YfJ5nHuIDUbUStIX2lIRtdzRQxY",
-    authDomain: "earn-money-54b9d.firebaseapp.com",
-    projectId: "earn-money-54b9d",
-    storageBucket: "earn-money-54b9d.firebasestorage.app",
-    messagingSenderId: "1048733611672",
-    appId: "1:1048733611672:web:3766b73fc5c784f3c682ed"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.togglePassword = (id, el) => {
-    const input = document.getElementById(id);
-    if (input.type === 'password') {
-      input.type = 'text';
-      el.innerText = '🙈';
-    } else {
-      input.type = 'password';
-      el.innerText = '👁️';
-    }
-  };
-
-  window.handleLogin = async () => {
-    const email = document.getElementById('login-email').value;
-    const pass = document.getElementById('login-password').value;
-
-    if (!email || !pass) {
-      alert("দয়া করে ইমেইল এবং পাসওয়ার্ড দিন!");
-      return;
-    }
-
-    try {
-      await signInWithEmailAndPassword(auth, email, pass);
-      alert("লগইন সফল হয়েছে!");
-      window.location.href = "index.html";
-    } catch (error) {
-      alert("লগইন ব্যর্থ: " + error.message);
-    }
-  };
-</script>
 
 </body>
 </html>
